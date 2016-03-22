@@ -92,23 +92,31 @@ def read_func(file):
                 ins += 1
                 unic_ins_nums.add(i[2])
 
-    print('Общее количество звонков по сервису  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(serv, len(unic_serv_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по продажам  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(sales, len(unic_sales_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по NFZ  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(nfz, len(unic_nfz_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по trade-in  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(tradein, len(unic_tradein_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по доп.оборудованию  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(dop, len(unic_dop_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по запчастям  - {0}\n'
-          'Уникальное количество звонков - {1}'.format(zch, len(unic_zch_nums)))
-    print("-" * 50)
-    print('Общее количество звонков по страхованию  - {0}\n'
-          'Уникальное количество звонков - {1}\n\n'.format(ins, len(unic_ins_nums)))
+    global html_text
+
+    html_text = u"""<span>Общее количество звонков по сервису  - {0}<br>
+              'Уникальное количество звонков - {1}</span>
+        <br><hr>
+        <span>Общее количество звонков по продажам  - {2}<br>
+              Уникальное количество звонков - {3}</span>
+        <br><hr>
+        <span>Общее количество звонков по NFZ  - {4}<br>
+              Уникальное количество звонков - {5}</span>
+        <br><hr>
+        <span>Общее количество звонков по trade-in  - {6}<br>
+              Уникальное количество звонков - {7}</span>
+        <br><hr>
+        <span>Общее количество звонков по доп.оборудованию  - {8}<br>
+              Уникальное количество звонков - {9}</span>
+        <br><hr>
+        <span>Общее количество звонков по запчастям  - {10}<br>
+              Уникальное количество звонков - {11}</span>
+        <br><hr>
+        <span>Общее количество звонков по страхованию  - {12}<br>
+              Уникальное количество звонков - {13}</span>""".format(serv, len(unic_serv_nums),
+                                                                    sales, len(unic_sales_nums),
+                                                                    nfz, len(unic_nfz_nums),
+                                                                    tradein, len(unic_tradein_nums),
+                                                                    dop, len(unic_dop_nums),
+                                                                    zch, len(unic_zch_nums),
+                                                                    ins, len(unic_ins_nums))

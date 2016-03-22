@@ -27,9 +27,9 @@ csv_work_file = r'{}\{}.csv'.format(directory, file_name)
 
 calls.read_func(csv_work_file)  # вызов программы обработки файла
 
-print('Отчет за прошлую неделю\n')
 
 if weekday == 0:
+    print('Отчет за прошлую неделю\n')
     while day != seven_days_before:             # заполняем список днями прошлой недели
         day = day - datetime.timedelta(days=1)
         days_of_last_week.append('{:%y_%m_%d}'.format(day))
