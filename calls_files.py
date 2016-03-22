@@ -1,43 +1,48 @@
 # coding: utf-8
 
 import datetime
+import shutil
+import calls
+import os
+import csv
 
+directory = r'{}\tarif'.format(os.getcwd())    # рабочая директория
 
+today = datetime.datetime.today()              # определяем дату сегодня
+day = today                                    # присваиваем значение по умолчанию
+weekday = datetime.datetime.today().weekday()  # определяем день недели
 
+print('Сегодня: {} - {}'.format(today, weekday))
 
-today = datetime.datetime.today()           # определяем дату сегодня
-day = today                                 # присваиваем значение по умолчанию
-weekday = datetime.datetime.today().weekday()
-days_of_last_week = []                      # тут будут дни прошлой недели
-day_before = today - datetime.timedelta(days=1)
-seven_days_before = today - datetime.timedelta(days=7)
-file_name = '{:%y_%m_%d}'.format(day_before)
+days_of_last_week = []                        # тут будут дни прошлой недели
 
-directory = r'C:\Users\Egor\PycharmProjects\calls\tarif'
+day_before = today - datetime.timedelta(days=1)  # определяем вчерашний день
+seven_days_before = today - datetime.timedelta(days=7)  # определяем дату неделю назад
+file_name = '{:%y_%m_%d}'.format(day_before)  # приобразовываем дату в название файла
 
-file = open(directory + '\{}.txt'.format(file_name), 'r')
-# тут будет вызов программы обработки файла
-print('Звонков вчера -', file.read())
-# -------------------------------------------
+shutil.copyfile(r'\\VS\tarif\{}.csv'.format(file_name),
+                r'{}\{}.csv'.format(directory, file_name))  # копируем файл на локальную машину
 
+csv_work_file = r'{}\{}.csv'.format(directory, file_name)
 
-# Нужно запускать, только если понедельник
-# if weekday = 0:
-while day != seven_days_before:             # заполняем список днями прошлой недели
-    day = day - datetime.timedelta(days=1)
-    days_of_last_week.append('{:%y_%m_%d}'.format(day))
+calls.read_func(csv_work_file)  # вызов программы обработки файла
 
-for day in days_of_last_week:
-    week = open(directory + '\{}.txt'.format(day), 'r')
-    print(week.read())
-print('Всего звонков за неделю -', 28)
+print('Отчет за прошлую неделю\n')
 
-# try:
+if weekday == 0:
+    while day != seven_days_before:             # заполняем список днями прошлой недели
+        day = day - datetime.timedelta(days=1)
+        days_of_last_week.append('{:%y_%m_%d}'.format(day))
 
-# except:
+    for day in days_of_last_week:
+        day_of_week = open(directory + '\{}.csv'.format(day), 'r', newline='')
+        callsreader = csv.reader(day_of_week, delimiter=';', quotechar='|')
+        with open(directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
+                                                  '{:%y_%m_%d}'.format(day_before)), 'a', newline='') as week_calls:
+            callswriter = csv.writer(week_calls, delimiter=';', quotechar='|')
+            for i in callsreader:
+                callswriter.writerow(i)
 
-
-# Программа запускается ежедневно
-# Проверяет дату и открывает вчерашний файл
-# Выполняется и отправляет отчет на почту
-# Если день = 0 (Понедельник), то отправляет отчет за всю прошлую неделю (открывает последние 7 файлов и сводит в один)
+    week_calls = directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
+                                                 '{:%y_%m_%d}'.format(day_before))
+    calls.read_func(week_calls)  # вызов программы обработки файла
