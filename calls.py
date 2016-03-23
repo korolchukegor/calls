@@ -4,7 +4,6 @@ import csv
 
 
 def read_func(file):
-
     serv = 0
     sales = 0
     tradein = 0
@@ -94,29 +93,70 @@ def read_func(file):
 
     global html_text
 
-    html_text = u"""<span>Общее количество звонков <b>по сервису</b>  - {0}<br>
-              Уникальное количество звонков - {1}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по продажам</b>  - {2}<br>
-              Уникальное количество звонков - {3}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по NFZ</b>  - {4}<br>
-              Уникальное количество звонков - {5}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по Trade-in</b>  - {6}<br>
-              Уникальное количество звонков - {7}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по доп.оборудованию</b>  - {8}<br>
-              Уникальное количество звонков - {9}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по запчастям</b>  - {10}<br>
-              Уникальное количество звонков - {11}</span>
-        <br><hr>
-        <span>Общее количество звонков <b>по страхованию</b>  - {12}<br>
-              Уникальное количество звонков - {13}</span>""".format(serv, len(unic_serv_nums),
-                                                                    sales, len(unic_sales_nums),
-                                                                    nfz, len(unic_nfz_nums),
-                                                                    tradein, len(unic_tradein_nums),
-                                                                    dop, len(unic_dop_nums),
-                                                                    zch, len(unic_zch_nums),
-                                                                    ins, len(unic_ins_nums))
+    html_text = u"""
+
+    <table>
+        <tr>
+            <td>Общее количество звонков <b>по сервису</b></td>
+            <td>{0}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{1}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по продажам</b></td>
+            <td>{2}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{3}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по NFZ</b></td>
+            <td>{4}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{5}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по Trade-in</b></td>
+            <td>{6}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{7}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по доп.оборудованию</b></td>
+            <td>{8}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{9}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по запчастям</b></td>
+            <td>{10}</td>
+        </tr>
+        <tr>
+            <td style = 'border-bottom: 1px solid black;'>Уникальное количество звонков</td>
+            <td style = 'border-bottom: 1px solid black;'>{11}</td>
+        </tr>
+        <tr>
+            <td>Общее количество звонков <b>по страхованию</b></td>
+            <td>{12}</td>
+        </tr>
+        <tr>
+            <td>Уникальное количество звонков</span></td>
+            <td>{13}</td>
+        </tr>
+
+    </table>""".format(serv, len(unic_serv_nums),
+                       sales, len(unic_sales_nums),
+                       nfz, len(unic_nfz_nums),
+                       tradein, len(unic_tradein_nums),
+                       dop, len(unic_dop_nums),
+                       zch, len(unic_zch_nums),
+                       ins, len(unic_ins_nums))
