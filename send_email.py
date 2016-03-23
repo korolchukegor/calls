@@ -9,11 +9,12 @@ import calls_files
 
 subject = u'Отчет по звонкам за {}'.format(calls_files.file_name)
 fromaddr = 'Mr. Robot <korolchukwork@gmail.com>'
-toaddr = 'Administrator <egorkorolchuk@gmail.com>'
+toaddr = ['Administrator <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>]
 
 multipart = MIMEMultipart('alternative')
 multipart['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
-multipart['To'] = Header(toaddr.encode('utf-8'), 'UTF-8').encode()
+for taddr in toaddr:
+    multipart['To'] = Header(taddr.encode('utf-8'), 'UTF-8').encode()
 multipart['From'] = Header(fromaddr.encode('utf-8'), 'UTF-8').encode()
 
 
