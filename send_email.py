@@ -7,16 +7,20 @@ from email.mime.text import MIMEText
 import calls
 import calls_files
 
-subject = u'Отчет по звонкам за {}'.format(calls_files.file_name)
+if calls_files.weekday == 0:
+    subject = u'Отчет по звонкам за период {} - {}'.format('{:%d-%m-%y}'.format(calls_files.seven_days_before),
+                                                           '{:%d-%m-%y}'.format(calls_files.day_before))
+else:
+    subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(calls_files.day_before))
+
 fromaddr = 'Mr. Robot <korolchukwork@gmail.com>'
-toaddr = ['Administrator <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>]
+toaddr = ['Egor <egor.korolchuk@vwspb.ru>']  # , 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
 multipart = MIMEMultipart('alternative')
 multipart['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
 for taddr in toaddr:
     multipart['To'] = Header(taddr.encode('utf-8'), 'UTF-8').encode()
 multipart['From'] = Header(fromaddr.encode('utf-8'), 'UTF-8').encode()
-
 
 text = u'Привет!\nЭто тестовая рассылка!'
 
