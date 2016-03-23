@@ -14,7 +14,7 @@ else:
     subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(calls_files.day_before))
 
 fromaddr = 'Mr. Robot <korolchukwork@gmail.com>'
-toaddr = ['Egor <egor.korolchuk@vwspb.ru>']  # , 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
+toaddr = ['Egor <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
 multipart = MIMEMultipart('alternative')
 multipart['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
