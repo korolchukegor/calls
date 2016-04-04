@@ -2,35 +2,27 @@
 
 import datetime
 import shutil
-import calls
 import os
 import csv
 
-directory = r'{}\tarif'.format(os.getcwd())    # рабочая директория
-
-today = datetime.datetime.today()              # определяем дату сегодня
-day = today                                    # присваиваем значение по умолчанию
-weekday = datetime.datetime.today().weekday()  # определяем день недели
-
+directory = r'{}\tarif'.format(os.getcwd())                     # рабочая директория
+today = datetime.datetime.today()                               # определяем дату сегодня
+day = today                                                     # присваиваем значение по умолчанию
+weekday = datetime.datetime.today().weekday()                   # определяем день недели
 print('Сегодня: {} - {}'.format(today, weekday))
+days_of_last_week = []                                          # тут будут дни прошлой недели
+day_before = today - datetime.timedelta(days=1)                 # определяем вчерашний день
+seven_days_before = today - datetime.timedelta(days=7)          # определяем дату неделю назад
 
-days_of_last_week = []                        # тут будут дни прошлой недели
 
-day_before = today - datetime.timedelta(days=1)  # определяем вчерашний день
-seven_days_before = today - datetime.timedelta(days=7)  # определяем дату неделю назад
-file_name = '{:%y_%m_%d}'.format(day_before)  # приобразовываем дату в название файла
+file_name = '{:%y_%m_%d}'.format(day_before)                    # приобразовываем дату в название файла
 
-shutil.copyfile(r'\\VS\tarif\{}.csv'.format(file_name),
-                r'{}\{}.csv'.format(directory, file_name))  # копируем файл на локальную машину
-
+shutil.copyfile(r'\\VS\tarif\{}.csv'.format(file_name),         # копируем файл на локальную машину
+                r'{}\{}.csv'.format(directory, file_name))
 csv_work_file = r'{}\{}.csv'.format(directory, file_name)
 
-calls.read_func(csv_work_file)  # вызов программы обработки файла
-
-
 if weekday == 0:
-    print('Отчет за прошлую неделю\n')
-    while day != seven_days_before:             # заполняем список днями прошлой недели
+    while day != seven_days_before:                             # заполняем список днями прошлой недели
         day = day - datetime.timedelta(days=1)
         days_of_last_week.append('{:%y_%m_%d}'.format(day))
 
@@ -43,6 +35,5 @@ if weekday == 0:
             for i in callsreader:
                 callswriter.writerow(i)
 
-    week_calls = directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
+    csv_work_file = directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
                                                  '{:%y_%m_%d}'.format(day_before))
-    calls.read_func(week_calls)  # вызов программы обработки файла
