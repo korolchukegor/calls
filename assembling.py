@@ -2,8 +2,8 @@
 
 import csv
 import sqlite3
-import datetime
 import calls_files
+
 
 int_serv_nums = []
 int_sales_nums = []
@@ -35,10 +35,10 @@ zch = {'Запчасти': []}
 ins = {'Страхование': []}
 
 
-def check_phone(int_dept_nums, dept, time):
+def check_phone(file, int_dept_nums, dept, time):
     """ Фильтрация csv-файла со звонками """
 
-    with open('{}'.format(calls_files.csv_work_file), newline='') as csvfile:
+    with open('{}'.format(file), newline='') as csvfile:
         callsreader = csv.reader(csvfile, delimiter=';', quotechar='|')
 
         for i in callsreader:
@@ -47,16 +47,16 @@ def check_phone(int_dept_nums, dept, time):
 
 
 def results(dept):
-    """ Запись данный в базу """
+    """ Запись данных в базу """
 
-    today = '{:%d_%m_%y}'.format(datetime.datetime.today())
-    conn = sqlite3.connect('data.db')
+    conn = sqlite3.connect('db.db')
     c = conn.cursor()
 
     for key in dept:
         c.execute('''CREATE TABLE IF NOT EXISTS {}(date TEXT UNIQUE, department TEXT, nums TEXT)'''.format(key))
-        c.execute("INSERT OR IGNORE INTO {} VALUES (?, ?, ?)".format(key), (today, key, len(dept[key])))
+        c.execute("INSERT OR IGNORE INTO {} VALUES (?, ?, ?)".format(key), (calls_files.file_name, key, len(dept[key])))
 
+    conn.commit()
     conn.close()
 
 

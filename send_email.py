@@ -17,8 +17,8 @@ def send_mail(html_text):
     else:
         subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(calls_files.day_before))
 
-    fromaddr = 'Mr. Robot <korolchukwork@gmail.com>'
-    toaddr = ['Egor <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
+    fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
+    toaddr = ['Egor <egor.korolchuk@vwspb.ru>']#, 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
     multipart = MIMEMultipart('alternative')
     multipart['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
@@ -45,7 +45,7 @@ def send_mail(html_text):
     # Проводим авторизацию:
     server.login(username, password)
     # Отправляем письмо:
-    server.sendmail(fromaddr, toaddr, multipart.as_string())
+    #server.sendmail(fromaddr, toaddr, multipart.as_string())
     print('Отчет отправлен')
     # Закрываем соединение с сервером
     server.quit()

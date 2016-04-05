@@ -4,6 +4,7 @@ import unittest
 from calls_files import file_name, directory, csv_work_file
 from assembling import *
 
+
 class TestCalls_Files(unittest.TestCase):
     """ Тестирование модуля Calls_Files """
 
@@ -28,6 +29,7 @@ class TestAssembling(unittest.TestCase):
 
     def test_read_config(self):
         """ Проверка правильности чтения config """
+
         read_config(int_serv_nums, 0)
         read_config(int_sales_nums, 1)
         read_config(int_tradein_nums, 2)
@@ -46,5 +48,4 @@ class TestAssembling(unittest.TestCase):
 
 
 if __name__ == '__main__':
-
     unittest.main()

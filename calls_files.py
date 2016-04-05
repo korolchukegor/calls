@@ -35,5 +35,5 @@ if weekday == 0:
             for i in callsreader:
                 callswriter.writerow(i)
 
-    csv_work_file = directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
+    csv_work_file2 = directory + '\{}-{}.csv'.format('{:%y_%m_%d}'.format(seven_days_before),
                                                  '{:%y_%m_%d}'.format(day_before))
