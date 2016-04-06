@@ -2,7 +2,6 @@
 
 import csv
 import sqlite3
-import calls_files
 
 
 int_serv_nums = []
@@ -46,7 +45,7 @@ def check_phone(file, int_dept_nums, dept, time):
                 addnums = [dept[key].append(i[2]) for key in dept]
 
 
-def results(dept):
+def results(dept, file_name):
     """ Запись данных в базу """
 
     conn = sqlite3.connect('db.db')
@@ -54,17 +53,17 @@ def results(dept):
 
     for key in dept:
         c.execute('''CREATE TABLE IF NOT EXISTS {}(date TEXT UNIQUE, department TEXT, nums TEXT)'''.format(key))
-        c.execute("INSERT OR IGNORE INTO {} VALUES (?, ?, ?)".format(key), (calls_files.file_name, key, len(dept[key])))
+        c.execute("INSERT OR IGNORE INTO {} VALUES (?, ?, ?)".format(key), (file_name, key, len(dept[key])))
 
     conn.commit()
     conn.close()
 
 
-def make_html():
+def make_html(template):
     """ Формирование html по шаблону """
 
     global html_text
-    with open('template.html', 'r', encoding='utf-8') as tp:
+    with open('{}.html'.format(template), 'r', encoding='utf-8') as tp:
         html_text = tp.read().format(len(serv['Сервис']), len(set(serv['Сервис'])),
                                      len(sales['Продажи']), len(set(sales['Продажи'])),
                                      len(tradein['Tradein']), len(set(tradein['Tradein'])),

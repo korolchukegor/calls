@@ -1,37 +1,50 @@
 ﻿# coding: utf-8
 
+import os
+import uuid
 import smtplib
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-import calls_files
+from email.mime.image import MIMEImage
 
 
-def send_mail(html_text):
+def send_mail(html_text, day_before, seven_days_before, template):
 
     """ Формирование письма для рассылки """
-
-    if calls_files.weekday == 0:
-        subject = u'Отчет по звонкам за период {} - {}'.format('{:%d-%m-%y}'.format(calls_files.seven_days_before),
-                                                               '{:%d-%m-%y}'.format(calls_files.day_before))
-    else:
-        subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(calls_files.day_before))
 
     fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
     toaddr = ['Egor <egor.korolchuk@vwspb.ru>']#, 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
-    multipart = MIMEMultipart('alternative')
-    multipart['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
+
+    if template == 'template7':
+        img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
+        subject = u'Отчет по звонкам за период {} - {}'.format('{:%d-%m-%y}'.format(seven_days_before),
+                                                               '{:%d-%m-%y}'.format(day_before))
+
+    else:
+        img = dict(title=u'Picture report…', path='', cid=str(uuid.uuid4()))
+        subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(day_before))
+
+
+    msg = MIMEMultipart('related')
+    msg['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
+    msg['From'] = Header(fromaddr.encode('utf-8'), 'UTF-8').encode()
     for taddr in toaddr:
-        multipart['To'] = Header(taddr.encode('utf-8'), 'UTF-8').encode()
-    multipart['From'] = Header(fromaddr.encode('utf-8'), 'UTF-8').encode()
+        msg['To'] = Header(taddr.encode('utf-8'), 'UTF-8').encode()
+
+    msg_alternative = MIMEMultipart('alternative')
+    msg.attach(msg_alternative)
 
     htmlpart = MIMEText(html_text.encode('utf-8'), 'html', 'UTF-8')
-    multipart.attach(htmlpart)
-
-    part1 = MIMEText(html_text, 'html')
-
-    multipart.attach(part1)
+    msg_alternative.attach(htmlpart)
+    try:
+        with open(img['path'], 'rb') as file:
+            msg_image = MIMEImage(file.read(), name=os.path.basename(img['path']))
+            msg.attach(msg_image)
+        msg_image.add_header('Content-ID', '<{}>'.format(img['cid']))
+    except FileNotFoundError:
+        pass
 
     username = u'korolchukwork@gmail.com'
     password = u'wgBZ1FgI8ykmWNF8vQgP'
@@ -45,7 +58,7 @@ def send_mail(html_text):
     # Проводим авторизацию:
     server.login(username, password)
     # Отправляем письмо:
-    #server.sendmail(fromaddr, toaddr, multipart.as_string())
+    server.sendmail(fromaddr, toaddr, msg.as_string())
     print('Отчет отправлен')
     # Закрываем соединение с сервером
     server.quit()

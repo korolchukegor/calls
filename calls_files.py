@@ -21,7 +21,7 @@ shutil.copyfile(r'\\VS\tarif\{}.csv'.format(file_name),         # копируе
                 r'{}\{}.csv'.format(directory, file_name))
 csv_work_file = r'{}\{}.csv'.format(directory, file_name)
 
-if weekday == 0:
+if weekday == 2:
     while day != seven_days_before:                             # заполняем список днями прошлой недели
         day = day - datetime.timedelta(days=1)
         days_of_last_week.append('{:%y_%m_%d}'.format(day))
