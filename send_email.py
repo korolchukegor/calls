@@ -14,7 +14,7 @@ def send_mail(html_text, day_before, seven_days_before, template):
     """ Формирование письма для рассылки """
 
     fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
-    toaddr = ['Egor <egor.korolchuk@vwspb.ru>']#, 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
+    toaddr = ['Egor <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
 
     if template == 'template7':

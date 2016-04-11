@@ -40,7 +40,7 @@ if __name__ == '__main__':
                          calls_files.seven_days_before,
                          template)
 
-    if calls_files.weekday == 2:
+    if calls_files.weekday == 0:
 
         template = 'template7'
         check_phone(calls_files.csv_work_file2, int_serv_nums, serv, 25)
