@@ -1,12 +1,394 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="92be7f24-b274-4767-92e8-97b21c360f83" name="Default" comment="graphs OK&#10;Mail with graphs">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/service_calls.iml" afterPath="$PROJECT_DIR$/.idea/service_calls.iml" />
+    <list default="true" id="92be7f24-b274-4767-92e8-97b21c360f83" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dbtel.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spirit.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_04_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/failtel.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/files.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/html.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index_all.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/rm.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/start.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_05_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_06_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_07_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_08_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_09_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_10_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_11_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/15_12_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_11-16_01_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_18-16_01_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_01_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_02_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_21.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_22.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_23.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_24.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_25.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_26.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_27.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_28.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_29.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_30.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_03_31.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_01.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_02.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_03.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_04.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_05.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_06.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_07.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_08.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_09.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_10.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_11.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_12.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_13.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_14.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_15.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_16.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_17.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_18.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_19.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tarif/16_04_20.csv" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/template7.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/todo.txt" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/assembling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/calls_files.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/calls_files.py" afterPath="$PROJECT_DIR$/calls_files.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graph.py" afterPath="$PROJECT_DIR$/graph.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/send_email.py" afterPath="$PROJECT_DIR$/send_email.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template.html" afterPath="$PROJECT_DIR$/template.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests.py" afterPath="$PROJECT_DIR$/tests.py" />
     </list>
     <ignored path="service_calls.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,28 +430,49 @@
     <favorites_list name="service_calls" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.4489325">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="assembling.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/assembling.py">
+          <file leaf-file-name="graph.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/graph.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="969">
-                  <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+                <state relative-caret-position="578">
+                  <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
                   <folding>
-                    <element signature="e#17#27#0" expanded="true" />
-                    <marker date="1459946249762" expanded="true" signature="1244:1319" placeholder="CREATE TABLE... IF" />
-                    <marker date="1459946249762" expanded="true" signature="1355:1396" placeholder="INSERT OR IG... service" />
+                    <element signature="e#17#34#0" expanded="true" />
+                    <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/tests.py">
+          <file leaf-file-name="index.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/index.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="459">
-                  <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+                <state relative-caret-position="731">
+                  <caret line="48" column="66" selection-start-line="48" selection-start-column="66" selection-end-line="48" selection-end-column="66" />
+                  <folding>
+                    <element signature="e#17#26#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="html.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/html.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="476">
+                  <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="files.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/files.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="748">
+                  <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
                   <folding>
                     <element signature="e#17#32#0" expanded="true" />
                   </folding>
@@ -80,34 +483,22 @@
           <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="629">
-                  <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+                <state relative-caret-position="986">
+                  <caret line="62" column="64" selection-start-line="62" selection-start-column="64" selection-end-line="62" selection-end-column="64" />
                   <folding>
-                    <element signature="e#17#34#0" expanded="true" />
+                    <element signature="e#17#29#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="send_email.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="send_email.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/send_email.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="476">
-                  <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+                <state relative-caret-position="136">
+                  <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
                   <folding>
                     <element signature="e#17#26#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="calls_files.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/calls_files.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="238">
-                  <caret line="17" column="65" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
-                  <folding>
-                    <element signature="e#17#32#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -117,21 +508,38 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="graph.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="graph.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/graph.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="314">
-                  <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+                <state relative-caret-position="680">
+                  <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
                   <folding>
                     <element signature="e#17#34#0" expanded="true" />
-                    <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-                    <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-                    <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-                    <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-                    <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-                    <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-                    <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-                    <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+                    <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="rm.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/rm.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="459">
+                  <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+                  <folding>
+                    <element signature="e#16#27#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/main.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="357">
+                  <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+                  <folding>
+                    <element signature="e#17#29#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -151,6 +559,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -160,14 +573,20 @@
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/start.bat" />
         <option value="$PROJECT_DIR$/template_1.html" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/tests.py" />
-        <option value="$PROJECT_DIR$/template.html" />
         <option value="$PROJECT_DIR$/calls.py" />
-        <option value="$PROJECT_DIR$/graph.py" />
+        <option value="$PROJECT_DIR$/indexing.py" />
         <option value="$PROJECT_DIR$/assembling.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/calls_files.py" />
+        <option value="$PROJECT_DIR$/index_all.py" />
+        <option value="$PROJECT_DIR$/template.html" />
+        <option value="$PROJECT_DIR$/template7.html" />
+        <option value="$PROJECT_DIR$/html.py" />
+        <option value="$PROJECT_DIR$/index.py" />
+        <option value="$PROJECT_DIR$/files.py" />
+        <option value="$PROJECT_DIR$/graph.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/send_email.py" />
       </list>
     </option>
@@ -178,9 +597,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="1" />
+    <option name="y" value="1" />
+    <option name="width" value="1918" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -208,7 +628,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -229,6 +648,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -243,8 +663,8 @@
       <recent name="C:\Users\korolchuk\Documents\python\service_calls" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration default="false" name="calls" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.test">
+    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -257,15 +677,17 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="service_calls" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="C:\Users\korolchuk\Documents\python\service_calls\main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="index_all" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -273,16 +695,45 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="service_calls" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/index_all.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="index" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="service_calls" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/index.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="service_calls" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\korolchuk\Documents\python\working\service_calls\rm.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -303,42 +754,6 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="calls_files" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="service_calls" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/calls_files.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="service_calls" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -355,6 +770,18 @@
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="service_calls" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Attests">
@@ -468,19 +895,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.calls" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
-      <item index="2" class="java.lang.String" itemvalue="Python.graph" />
-      <item index="3" class="java.lang.String" itemvalue="Python.calls_files" />
-      <item index="4" class="java.lang.String" itemvalue="Python.main" />
+      <item index="0" class="java.lang.String" itemvalue="Python.main" />
+      <item index="1" class="java.lang.String" itemvalue="Python.index_all" />
+      <item index="2" class="java.lang.String" itemvalue="Python.index" />
+      <item index="3" class="java.lang.String" itemvalue="Python.test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.graph" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.main" />
-        <item index="1" class="java.lang.String" itemvalue="Python.calls" />
+        <item index="0" class="java.lang.String" itemvalue="Python.test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main" />
         <item index="2" class="java.lang.String" itemvalue="Python.graph" />
-        <item index="3" class="java.lang.String" itemvalue="Python.calls_files" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in tests" />
+        <item index="3" class="java.lang.String" itemvalue="Python.index" />
+        <item index="4" class="java.lang.String" itemvalue="Python.index_all" />
       </list>
     </recent_temporary>
   </component>
@@ -617,7 +1044,14 @@
       <option name="project" value="LOCAL" />
       <updated>1459947003103</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="graphs OK&#10;Mail with graphs">
+      <created>1460382793609</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1460382793609</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -653,28 +1087,28 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
+    <frame x="1" y="1" width="1918" height="1038" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09739583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.09946808" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3605292" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39831403" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29820865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39831403" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -715,50 +1149,12 @@
           <properties exception="BaseException" />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="29" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding>
-            <element signature="e#17#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/send_email.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#17#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="27" column="44" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
@@ -774,14 +1170,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -796,7 +1185,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -811,7 +1200,7 @@
         <state relative-caret-position="0">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -822,14 +1211,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -844,7 +1226,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -859,7 +1241,7 @@
         <state relative-caret-position="0">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -870,14 +1252,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -892,7 +1267,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -907,7 +1282,7 @@
         <state relative-caret-position="0">
           <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -918,14 +1293,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -940,7 +1308,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -955,7 +1323,7 @@
         <state relative-caret-position="0">
           <caret line="65" column="3" selection-start-line="65" selection-start-column="3" selection-end-line="65" selection-end-column="3" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -966,14 +1334,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -988,7 +1349,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
@@ -1003,7 +1364,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="15" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1014,14 +1375,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
@@ -1036,7 +1390,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
@@ -1051,12 +1405,12 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1071,12 +1425,12 @@
         <state relative-caret-position="0">
           <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
           <folding>
-            <element signature="e#17#34#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="18" column="43" selection-start-line="18" selection-start-column="43" selection-end-line="18" selection-end-column="43" />
@@ -1166,59 +1520,61 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spirit.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template7.html">
+    <entry file="file://$PROJECT_DIR$/tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="7" selection-start-line="0" selection-start-column="7" selection-end-line="0" selection-end-column="7" />
+        <state relative-caret-position="595">
+          <caret line="35" column="36" selection-start-line="35" selection-start-column="36" selection-end-line="35" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/send_email.py">
+    <entry file="file://$PROJECT_DIR$/index_all.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state relative-caret-position="102">
+          <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template7.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="37" selection-start-line="6" selection-start-column="37" selection-end-line="6" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="48" column="66" selection-start-line="48" selection-start-column="66" selection-end-line="48" selection-end-column="66" />
           <folding>
             <element signature="e#17#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/html.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#17#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="476">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/calls_files.py">
+    <entry file="file://$PROJECT_DIR$/files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" column="65" selection-start-line="17" selection-start-column="65" selection-end-line="17" selection-end-column="65" />
-          <folding>
-            <element signature="e#17#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="31" selection-start-line="29" selection-start-column="31" selection-end-line="29" selection-end-column="31" />
+        <state relative-caret-position="748">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
           <folding>
             <element signature="e#17#32#0" expanded="true" />
           </folding>
@@ -1227,30 +1583,41 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        <state relative-caret-position="680">
+          <caret line="40" column="15" selection-start-line="40" selection-start-column="15" selection-end-line="40" selection-end-column="15" />
           <folding>
             <element signature="e#17#34#0" expanded="true" />
-            <marker date="1459945647909" expanded="true" signature="518:530" placeholder="SELECT * FRO... service" />
-            <marker date="1459945647909" expanded="true" signature="518:535" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:537" placeholder="SELECT * FRO... missing_value" />
-            <marker date="1459945647909" expanded="true" signature="518:549" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:552" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:553" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:556" placeholder="SELECT date,... " />
-            <marker date="1459945647909" expanded="true" signature="518:568" placeholder="SELECT * FRO... *" />
+            <marker date="1461232874187" expanded="true" signature="658:665" placeholder="SELECT * FRO... *" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assembling.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="17" selection-start-line="57" selection-start-column="17" selection-end-line="57" selection-end-column="17" />
+        <state relative-caret-position="357">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
           <folding>
-            <element signature="e#17#27#0" expanded="true" />
-            <marker date="1459946249762" expanded="true" signature="1244:1319" placeholder="CREATE TABLE... IF" />
-            <marker date="1459946249762" expanded="true" signature="1355:1396" placeholder="INSERT OR IG... service" />
+            <element signature="e#17#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/send_email.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+          <folding>
+            <element signature="e#17#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="30" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+          <folding>
+            <element signature="e#16#27#0" expanded="true" />
           </folding>
         </state>
       </provider>

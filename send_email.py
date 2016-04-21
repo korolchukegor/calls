@@ -9,23 +9,19 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 
 
-def send_mail(html_text, day_before, seven_days_before, template):
-
+def send_mail(html_text, day_before, week, template):
     """ Формирование письма для рассылки """
 
     fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
     toaddr = ['Egor <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
 
-
     if template == 'template7':
         img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
-        subject = u'Отчет по звонкам за период {} - {}'.format('{:%d-%m-%y}'.format(seven_days_before),
-                                                               '{:%d-%m-%y}'.format(day_before))
+        subject = u'Отчет по звонкам за {} неделю'.format(week)
 
     else:
         img = dict(title=u'Picture report…', path='', cid=str(uuid.uuid4()))
         subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(day_before))
-
 
     msg = MIMEMultipart('related')
     msg['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()

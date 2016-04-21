@@ -4,45 +4,48 @@ import matplotlib
 import matplotlib.pyplot as plt
 from pandas import DataFrame
 import sqlite3
+import files
 
 matplotlib.rc('font', family='Arial')
 
 x = {}
-servdict = {'Сервис': []}
-salesdict = {'Продажи': []}
-tradeindict = {'Tradein': []}
-nfzdict = {'NFZ': []}
-dopdict = {'Доп': []}
-zchdict = {'Запчасти': []}
-insdict = {'Страхование': []}
+y = files.weeks_to_graph
 
-def read_base(dept, days_of_last_week):
-    """ Чтение данных из базы """
+servdict = {u'service': []}
+salesdict = {u'sales': []}
+tradeindict = {u'tradein': []}
+nfzdict = {u'nfz': []}
+dopdict = {u'dop': []}
+zchdict = {u'zch': []}
+insdict = {u'insurance': []}
 
-    conn = sqlite3.connect('db.db')
+
+def read_base50(dept, weeks_years_list):
+    """ Чтение данных из базы за 50 недель """
+
+    conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
+    for lst in weeks_years_list:
+        week = lst[1]
+        year = lst[0]
+        for key in dept:
+            c.execute("SELECT count(DISTINCT num) FROM calls WHERE department == (?) AND datetime LIKE '{}%' "
+                      "AND week == (?)".format(year), (key, week))
+            for i in c.fetchall():
+                dept[key].append(int(i[0]))
 
-    for key in dept:
-        c.execute("SELECT nums FROM {} WHERE date IN ({})".format(key, ','.join(['?'] * len(days_of_last_week))),
-                  days_of_last_week)
-
-        for num in c.fetchall():
-            dept[key].append(int(','.join(num)))
-
-        x.update(dept)
+    x.update(dept)
     conn.close()
-    return x
 
 
 def graphics():
     """ Строим график """
 
-    y = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Суб', 'Воскр']
-    df2 = DataFrame(x, index=y, columns=['Сервис', 'Продажи', 'Tradein', 'NFZ', 'Доп', 'Запчасти', 'Страхование'])
-    df2.plot(kind='bar', stacked=True, figsize=(15, 15))
-    plt.axis([-1, 7, 0, 300])
-    plt.title(u'Звонки за прошлую неделю:', {'fontname': 'Arial', 'fontsize': 20})  # Задаем заголовок диаграммы
-    plt.xlabel(u'Дата', {'fontname': 'Arial', 'fontsize': 20})                      # Задаем подписи к осям X и Y
+    df2 = DataFrame(x, index=y, columns=[u'service', u'sales', u'tradein', u'nfz', u'dop', u'zch', u'insurance'])
+    df2.plot(kind='bar', stacked=True, width=.8, figsize=(20, 20))
+    plt.axis([-0.5, 50.5, 0, 1200])
+    plt.title(u'Звонки по неделям:', {'fontname': 'Arial', 'fontsize': 20})  # Задаем заголовок диаграммы
+    plt.xlabel(u'Недели', {'fontname': 'Arial', 'fontsize': 20})  # Задаем подписи к осям X и Y
     plt.ylabel(u'Звонки', {'fontname': 'Arial', 'fontsize': 20})
-    plt.grid()                                                                      # Включаем сетку
-    plt.savefig('spirit.png', format='png')                                         # Сохраняем построенную диаграмму в файл
+    plt.grid()  # Включаем сетку
+    plt.savefig('spirit.png', format='png')  # Сохраняем построенную диаграмму в файл

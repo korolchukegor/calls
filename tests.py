@@ -1,8 +1,8 @@
 # coding: utf-8
 
 import unittest
-from calls_files import file_name, directory, csv_work_file
-from assembling import *
+from files import file_name, directory, csv_work_file
+from index import *
 
 
 class TestCalls_Files(unittest.TestCase):
