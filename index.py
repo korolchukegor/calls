@@ -6,6 +6,7 @@ import sqlite3
 import datetime
 import re
 import files
+import logging
 
 int_serv_nums = []
 int_sales_nums = []
@@ -38,11 +39,12 @@ def read_config(int_dept_nums, colnum):
             if cell[colnum] != '':
                 int_dept_nums.append(int(cell[colnum]))
 
+    logging.info('{} config OK'.format(int_dept_nums))
+
 
 def check_phone(file, int_dept_nums, dept, week, time):
     """ Фильтрация csv-файла со звонками """
 
-    print('Обрабатываю звонки и заношу в базу', dept)
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS calls(id TEXT UNIQUE,
@@ -64,9 +66,10 @@ def check_phone(file, int_dept_nums, dept, week, time):
                 if i[1] == u'RX' and int(i[3]) in int_dept_nums and int(i[4]) >= time:
                     c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (idnum, i[0][0:10],
                                                                                      week, dept, i[2]))
-            except ValueError:
-                print(u'Неправильное значение номера - ', i[3])
 
+            except ValueError:
+                logging.warning(u'wrong number - {}'.format(i[3]))
+    logging.info('{} checked and added to base'.format(dept))
     conn.commit()
     conn.close()
 
@@ -87,7 +90,6 @@ def read_base():
 def copy_and_add(lst, date_start, date_end):
     """ Копирование и обработка файлов """
 
-    print('Копирую файлы')
     while True:
         date_start = date_start + datetime.timedelta(days=1)
         if date_start == date_end:
@@ -114,13 +116,12 @@ def counter_days(directory):
     files_list_lastyear = []
 
     if len(os.listdir(directory)) <= 1:
-        print('Папка пустая')
+        logging.warning('directory is empty')
         date_last_year = datetime.datetime.today() - datetime.timedelta(days=365)
         date_of_file = datetime.datetime.today()
         copy_and_add(files_list_lastyear, date_last_year, date_of_file)
 
     else:
-        print('Проверяю, все ли данные есть')
         for file in os.listdir(directory):
             if len(file) == 12:
                 date_file = files.filetodate(file)
@@ -128,5 +129,8 @@ def counter_days(directory):
 
         for indx in range(len(files_list) - 1):
             if files_list[indx + 1] - datetime.timedelta(days=1) != files_list[indx]:
+                logging.warning('some files lost')
                 date = files_list[indx]
                 copy_and_add(files_list_lost, date, files_list[indx + 1])
+
+        logging.info('all files are in the {}'.format(directory))

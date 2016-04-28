@@ -20,19 +20,18 @@ zchdict = {u'zch': []}
 insdict = {u'insurance': []}
 
 
-def read_base50(dept, weeks_years_list):
+def read_base50(dept, weeks_start, weeks_end):
     """ Чтение данных из базы за 50 недель """
 
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
-    for lst in weeks_years_list:
-        week = lst[1]
-        year = lst[0]
-        for key in dept:
-            c.execute("SELECT count(DISTINCT num) FROM calls WHERE department == (?) AND datetime LIKE '{}%' "
-                      "AND week == (?)".format(year), (key, week))
-            for i in c.fetchall():
-                dept[key].append(int(i[0]))
+    for key in dept:
+        for day_start, day_end in zip(weeks_start, weeks_end):
+            c.execute(
+                "SELECT count(DISTINCT num) FROM calls WHERE department == (?) AND datetime BETWEEN (?) AND (?)",
+                (key, day_start, day_end))
+            for j in c.fetchall():
+                dept[key].append(int(j[0]))
 
     x.update(dept)
     conn.close()
@@ -43,7 +42,7 @@ def graphics():
 
     df2 = DataFrame(x, index=y, columns=[u'service', u'sales', u'tradein', u'nfz', u'dop', u'zch', u'insurance'])
     df2.plot(kind='bar', stacked=True, width=.8, figsize=(20, 20))
-    plt.axis([-0.5, 50.5, 0, 1200])
+    plt.axis([-0.5, 49.5, 0, 1200])
     plt.title(u'Звонки по неделям:', {'fontname': 'Arial', 'fontsize': 20})  # Задаем заголовок диаграммы
     plt.xlabel(u'Недели', {'fontname': 'Arial', 'fontsize': 20})  # Задаем подписи к осям X и Y
     plt.ylabel(u'Звонки', {'fontname': 'Arial', 'fontsize': 20})

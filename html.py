@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import sqlite3
+import logging
 
 
 def callsbyday(day, dept):
@@ -35,4 +36,4 @@ def make_html(template, serv, sales, tradein, nfz, dop, zch, ins):
     global html_text
     with open('{}.html'.format(template), 'r', encoding='utf-8') as tp:
         html_text = tp.read().format(serv, sales, tradein, nfz, dop, zch, ins)
-
+    logging.info('html OK')

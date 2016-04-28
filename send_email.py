@@ -3,6 +3,7 @@
 import os
 import uuid
 import smtplib
+import logging
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -55,6 +56,6 @@ def send_mail(html_text, day_before, week, template):
     server.login(username, password)
     # Отправляем письмо:
     server.sendmail(fromaddr, toaddr, msg.as_string())
-    print('Отчет отправлен')
+    logging.info('report sent')
     # Закрываем соединение с сервером
     server.quit()
