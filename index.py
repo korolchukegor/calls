@@ -7,14 +7,17 @@ import datetime
 import re
 import files
 import logging
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-int_serv_nums = []
-int_sales_nums = []
-int_tradein_nums = []
-int_nfz_nums = []
-int_dop_nums = []
-int_zch_nums = []
-int_ins_nums = []
+int_serv_nums = config['int_dept_nums']['service'].split(',')
+int_sales_nums = config['int_dept_nums']['sales'].split(',')
+int_tradein_nums = config['int_dept_nums']['tradein'].split(',')
+int_nfz_nums = config['int_dept_nums']['nfz'].split(',')
+int_dop_nums = config['int_dept_nums']['dop'].split(',')
+int_zch_nums = config['int_dept_nums']['zch'].split(',')
+int_ins_nums = config['int_dept_nums']['insurance'].split(',')
 
 depts = [
 
@@ -26,20 +29,6 @@ depts = [
     u'zch',
     u'insurance'
 ]
-
-
-def read_config(int_dept_nums, colnum):
-    """ Чтение файла  config """
-
-    with open('config.csv', newline='') as csvfile:
-        cells = csv.reader(csvfile, delimiter=';', quotechar='|')
-        next(cells)
-
-        for cell in cells:
-            if cell[colnum] != '':
-                int_dept_nums.append(int(cell[colnum]))
-
-    logging.info('{} config OK'.format(int_dept_nums))
 
 
 def check_phone(file, int_dept_nums, dept, week, time):

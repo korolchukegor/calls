@@ -9,17 +9,10 @@ import logging
 
 if __name__ == '__main__':
     logging.info('SCRIPT STARTS')
-    index.read_config(index.int_serv_nums, 0)
-    index.read_config(index.int_sales_nums, 1)
-    index.read_config(index.int_tradein_nums, 2)
-    index.read_config(index.int_nfz_nums, 3)
-    index.read_config(index.int_dop_nums, 4)
-    index.read_config(index.int_zch_nums, 5)
-    index.read_config(index.int_ins_nums, 6)
-
-    index.counter_days(files.directory)
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
+
+    index.counter_days(files.directory)
 
     index.check_phone(files.work_file, index.int_serv_nums, index.depts[0], files.week, 25)
     index.check_phone(files.work_file, index.int_sales_nums, index.depts[1], files.week, 60)
@@ -42,7 +35,6 @@ if __name__ == '__main__':
     # index.read_base() # Для отладки
 
     if files.weekday == 0:
-
         html.make_html('template7', html.callsbyweek(index.depts[0], files.year_now, files.week),
                        html.callsbyweek(index.depts[1], files.year_now, files.week),
                        html.callsbyweek(index.depts[2], files.year_now, files.week),

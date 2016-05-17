@@ -5,6 +5,8 @@ import shutil
 import os
 import logging
 
+# TODO Сделать файл красиво
+
 directory = r'{}\tarif\\'.format(os.getcwd())  # рабочая директория
 day_before = datetime.datetime.today() - datetime.timedelta(days=1)  # определяем вчерашний день
 date_day_before = '{:%Y-%m-%d}'.format(day_before)
@@ -17,7 +19,8 @@ weeks_start = []
 weeks_end = []
 weeks_to_graph = []
 
-logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d', level=logging.DEBUG, filename=u'log.log')
+logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d', level=logging.DEBUG,
+                    filename=u'log.log')
 
 
 def copyfile(serverfile, workfile):
@@ -25,6 +28,7 @@ def copyfile(serverfile, workfile):
 
     shutil.copyfile(serverfile, workfile)
     logging.info('copying {}'.format(workfile))
+
 
 def filetodate(filename):
     """ Получаем дату по названию файл """
@@ -58,12 +62,11 @@ def time_gen(start, end, delta):
 week = filetoweek(file_name)
 year_now = '{:%Y}'.format(datetime.datetime.today())
 
-for res in time_gen((datetime.datetime.today() - datetime.timedelta(weeks=50)), datetime.datetime.today(), datetime.timedelta(weeks=1)):
+for res in time_gen((datetime.datetime.today() - datetime.timedelta(weeks=50)), datetime.datetime.today(),
+                    datetime.timedelta(weeks=1)):
     weeks_start.append('{:%Y-%m-%d}'.format(res))
     weeks_to_graph.append(res.isocalendar()[1])
 
-for res in time_gen((day_before - datetime.timedelta(weeks=49)), datetime.datetime.today(), datetime.timedelta(weeks=1)):
+for res in time_gen((day_before - datetime.timedelta(weeks=49)), datetime.datetime.today(),
+                    datetime.timedelta(weeks=1)):
     weeks_end.append('{:%Y-%m-%d}'.format(res))
-
-
-

@@ -8,13 +8,17 @@ from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
 
 
 def send_mail(html_text, day_before, week, template):
     """ Формирование письма для рассылки """
 
+    # TODO Сделать, чтобы во всех почтовых клиентах график был в шаблоне, а не во вложении
     fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
-    toaddr = ['Egor <egor.korolchuk@vwspb.ru>', 'Yana <marketing@vwspb.ru>', 'Oleg <oleg.semenov@vwspb.ru>']
+    toaddr = config['send_mails']['mails'].split(',')
 
     if template == 'template7':
         img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
