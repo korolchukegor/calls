@@ -11,13 +11,14 @@ import configparser
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-int_serv_nums = config['int_dept_nums']['service'].split(',')
-int_sales_nums = config['int_dept_nums']['sales'].split(',')
-int_tradein_nums = config['int_dept_nums']['tradein'].split(',')
-int_nfz_nums = config['int_dept_nums']['nfz'].split(',')
-int_dop_nums = config['int_dept_nums']['dop'].split(',')
-int_zch_nums = config['int_dept_nums']['zch'].split(',')
-int_ins_nums = config['int_dept_nums']['insurance'].split(',')
+int_serv_nums = list(map(int, config['int_dept_nums']['service'].split(',')))
+int_sales_nums = list(map(int, config['int_dept_nums']['sales'].split(',')))
+int_tradein_nums = list(map(int, config['int_dept_nums']['tradein'].split(',')))
+int_nfz_nums = list(map(int, config['int_dept_nums']['nfz'].split(',')))
+int_dop_nums = list(map(int, config['int_dept_nums']['dop'].split(',')))
+int_zch_nums = list(map(int, config['int_dept_nums']['zch'].split(',')))
+int_ins_nums = list(map(int, config['int_dept_nums']['insurance'].split(',')))
+
 
 depts = [
 
@@ -51,6 +52,7 @@ def check_phone(file, int_dept_nums, dept, week, time):
             elif i[2] == u'НеваСервис':
                 i[2] = u'2447778'
             idnum = re.sub(r'[- :]', '', i[0]) + i[2] + i[3]
+
             try:
                 if i[1] == u'RX' and int(i[3]) in int_dept_nums and int(i[4]) >= time:
                     c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (idnum, i[0][0:10],

@@ -12,7 +12,7 @@ def callsbyday(day, dept):
     c.execute("SELECT count(DISTINCT num) FROM calls WHERE datetime == (?) AND department == (?)", (day, dept))
     for i in c.fetchall():
         return i[0]
-
+        print(i[0])
     conn.close()
 
 
