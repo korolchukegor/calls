@@ -47,8 +47,8 @@ def send_mail(html_text, day_before, week, template):
     except FileNotFoundError:
         pass
 
-    username = u'korolchukwork@gmail.com'
-    password = u'wgBZ1FgI8ykmWNF8vQgP'
+    username = config['mail_login']['username']
+    password = config['mail_login']['password']
     # Инициализируем соединение с сервером gmail по протоколу smtp.
     serv = u'smtp.gmail.com:587'
     server = smtplib.SMTP(serv)
