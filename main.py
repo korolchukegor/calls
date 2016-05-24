@@ -2,7 +2,7 @@
 
 import index
 import html
-import graph
+import plot
 import send_email
 import files
 import logging
@@ -22,7 +22,7 @@ if __name__ == '__main__':
     index.check_phone(files.work_file, index.int_zch_nums, index.depts[5], files.week, 45)
     index.check_phone(files.work_file, index.int_ins_nums, index.depts[6], files.week, 45)
 
-    html.make_html('template', html.callsbyday(files.date_day_before, index.depts[0]),
+    html.make_html('template', plot.plot_url, html.callsbyday(files.date_day_before, index.depts[0]),
                    html.callsbyday(files.date_day_before, index.depts[1]),
                    html.callsbyday(files.date_day_before, index.depts[2]),
                    html.callsbyday(files.date_day_before, index.depts[3]),
@@ -32,26 +32,36 @@ if __name__ == '__main__':
 
     send_email.send_mail(html.html_text, files.day_before, files.week, 'template')
     logging.info('DAILY SCRIPT ENDS')
-    # index.read_base() # Для отладки
 
     if files.weekday == 0:
-        html.make_html('template7', html.callsbyweek(index.depts[0], files.year_now, files.week),
+
+        logging.info('report from {} -- {}'.format(files.weeks_start[0], files.weeks_start[-1]))
+        plot.read_base50(plot.servdict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.salesdict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.tradeindict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.nfzdict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.dopdict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.zchdict, files.weeks_start, files.weeks_end)
+        plot.read_base50(plot.insdict, files.weeks_start, files.weeks_end)
+
+        plot.make_trace(plot.servdict)
+        plot.make_trace(plot.salesdict)
+        plot.make_trace(plot.tradeindict)
+        plot.make_trace(plot.nfzdict)
+        plot.make_trace(plot.dopdict)
+        plot.make_trace(plot.zchdict)
+        plot.make_trace(plot.insdict)
+
+        plot.send_data_plot()
+        plot.create_dashboard(plot.plot_url)
+
+        html.make_html('template7', plot.plot_url, html.callsbyweek(index.depts[0], files.year_now, files.week),
                        html.callsbyweek(index.depts[1], files.year_now, files.week),
                        html.callsbyweek(index.depts[2], files.year_now, files.week),
                        html.callsbyweek(index.depts[3], files.year_now, files.week),
                        html.callsbyweek(index.depts[4], files.year_now, files.week),
                        html.callsbyweek(index.depts[5], files.year_now, files.week),
                        html.callsbyweek(index.depts[6], files.year_now, files.week))
-        logging.info('report from {} -- {}'.format(files.weeks_start[0], files.weeks_start[-1]))
-        graph.read_base50(graph.servdict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.salesdict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.tradeindict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.nfzdict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.dopdict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.zchdict, files.weeks_start, files.weeks_end)
-        graph.read_base50(graph.insdict, files.weeks_start, files.weeks_end)
-
-        graph.graphics()
 
         send_email.send_mail(html.html_text, files.day_before, files.week, 'template7')
         logging.info('WEEKLY SCRIPT ENDS')

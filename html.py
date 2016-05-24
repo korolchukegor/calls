@@ -12,7 +12,7 @@ def callsbyday(day, dept):
     c.execute("SELECT count(DISTINCT num) FROM calls WHERE datetime == (?) AND department == (?)", (day, dept))
     for i in c.fetchall():
         return i[0]
-        print(i[0])
+
     conn.close()
 
 
@@ -30,10 +30,10 @@ def callsbyweek(dept, year, week):
     conn.close()
 
 
-def make_html(template, serv, sales, tradein, nfz, dop, zch, ins):
+def make_html(template, link, serv, sales, tradein, nfz, dop, zch, ins):
     """ Формирование html по шаблону """
 
     global html_text
     with open('{}.html'.format(template), 'r', encoding='utf-8') as tp:
-        html_text = tp.read().format(serv, sales, tradein, nfz, dop, zch, ins)
+        html_text = tp.read().format(link, serv, sales, tradein, nfz, dop, zch, ins)
     logging.info('html OK')

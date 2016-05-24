@@ -65,7 +65,7 @@ year_now = '{:%Y}'.format(datetime.datetime.today())
 for res in time_gen((datetime.datetime.today() - datetime.timedelta(weeks=50)), datetime.datetime.today(),
                     datetime.timedelta(weeks=1)):
     weeks_start.append('{:%Y-%m-%d}'.format(res))
-    weeks_to_graph.append(res.isocalendar()[1])
+    weeks_to_graph.append(str(res.isocalendar()[1]))
 
 for res in time_gen((day_before - datetime.timedelta(weeks=49)), datetime.datetime.today(),
                     datetime.timedelta(weeks=1)):

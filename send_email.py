@@ -9,6 +9,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 import configparser
+
+
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -39,13 +41,6 @@ def send_mail(html_text, day_before, week, template):
 
     htmlpart = MIMEText(html_text.encode('utf-8'), 'html', 'UTF-8')
     msg_alternative.attach(htmlpart)
-    try:
-        with open(img['path'], 'rb') as file:
-            msg_image = MIMEImage(file.read(), name=os.path.basename(img['path']))
-            msg.attach(msg_image)
-        msg_image.add_header('Content-ID', '<{}>'.format(img['cid']))
-    except FileNotFoundError:
-        pass
 
     username = config['mail_login']['username']
     password = config['mail_login']['password']
