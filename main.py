@@ -6,8 +6,13 @@ import plot
 import send_email
 import files
 import logging
+import direct
 
 if __name__ == '__main__':
+
+    logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
+                        level=logging.DEBUG,
+                        filename=u'log.log')
     logging.info('SCRIPT STARTS')
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
@@ -21,6 +26,17 @@ if __name__ == '__main__':
     index.check_phone(files.work_file, index.int_dop_nums, index.depts[4], files.week, 45)
     index.check_phone(files.work_file, index.int_zch_nums, index.depts[5], files.week, 45)
     index.check_phone(files.work_file, index.int_ins_nums, index.depts[6], files.week, 45)
+
+    direct.check_direct(direct.service, files.date_day_before, compaign_type='search')
+    direct.check_direct(direct.sales, files.date_day_before, compaign_type='search')
+    direct.check_direct(direct.tradein, files.date_day_before, compaign_type='search')
+    direct.check_direct(direct.nfz, files.date_day_before, compaign_type='search')
+    direct.check_direct(direct.insurance, files.date_day_before, compaign_type='search')
+    direct.check_direct(direct.service, files.date_day_before, compaign_type='rsya')
+    direct.check_direct(direct.sales, files.date_day_before, compaign_type='rsya')
+    direct.check_direct(direct.tradein, files.date_day_before, compaign_type='rsya')
+    direct.check_direct(direct.nfz, files.date_day_before, compaign_type='rsya')
+    direct.check_direct(direct.insurance, files.date_day_before, compaign_type='rsya')
 
     html.make_html('template', plot.plot_url, html.callsbyday(files.date_day_before, index.depts[0]),
                    html.callsbyday(files.date_day_before, index.depts[1]),

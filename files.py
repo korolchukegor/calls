@@ -19,9 +19,6 @@ weeks_start = []
 weeks_end = []
 weeks_to_graph = []
 
-logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d', level=logging.DEBUG,
-                    filename=u'log.log')
-
 
 def copyfile(serverfile, workfile):
     """ Копируем файл на локальную машину """
