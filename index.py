@@ -88,7 +88,7 @@ def copy_and_add(lst, date_start, date_end):
         lst.append('{:%y_%m_%d}.csv'.format(date_start))
 
     for file in lst:
-        week = files.filetoweek(file)
+        week = files.DateFormat.filetoweek(file)
         files.copyfile(files.server_dir + file, files.directory + file)
         check_phone(files.directory + file, int_serv_nums, depts[0], week, 25)
         check_phone(files.directory + file, int_sales_nums, depts[1], week, 60)
@@ -115,7 +115,7 @@ def counter_days(directory):
     else:
         for file in os.listdir(directory):
             if len(file) == 12:
-                date_file = files.filetodate(file)
+                date_file = files.DateFormat.filetodate(file)
                 files_list.append(date_file)
 
         for indx in range(len(files_list) - 1):

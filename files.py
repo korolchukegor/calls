@@ -4,20 +4,67 @@ import datetime
 import shutil
 import os
 import logging
+import configparser
 
 # TODO Сделать файл красиво
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-directory = r'{}\tarif\\'.format(os.getcwd())  # рабочая директория
-day_before = datetime.datetime.today() - datetime.timedelta(days=1)  # определяем вчерашний день
-date_day_before = '{:%Y-%m-%d}'.format(day_before)
-seven_days_before = datetime.datetime.today() - datetime.timedelta(days=7)  # определяем дату неделю назад
+directory = r'{}\tarif\\'.format(os.getcwd())
+day_before = datetime.datetime.today() - datetime.timedelta(days=1)
+seven_days_before = datetime.datetime.today() - datetime.timedelta(days=7)
 weekday = datetime.datetime.today().weekday()  # определяем день недели
 file_name = '{:%y_%m_%d}'.format(day_before)  # приобразовываем дату в название файла
-server_dir = r'\\VS\tarif\\'
+server_dir = config['calls_server']['directory']
 work_file = r'{}\{}.csv'.format(directory, file_name)
 weeks_start = []
 weeks_end = []
 weeks_to_graph = []
+
+
+class DateFormat:
+    """ Преобразование даты в необходимый вид """
+
+    @staticmethod
+    def calltouch_leads(date):
+        """ Calltouch запрос лидов """
+
+        new_date = '{:%Y/%m/%d}'.format(date)
+        return new_date
+
+    @staticmethod
+    def calltouch_calls(date):
+        """ Calltouch запрос лидов """
+
+        new_date = '{:%d/%m/%Y}'.format(date)
+        return new_date
+
+    @staticmethod
+    def calls_date(date):
+        """ Индексирование csv-файла со звонками """
+
+        new_date = '{:%Y-%m-%d}'.format(date)
+        return new_date
+
+    @staticmethod
+    def filetodate(filename):
+        """ Получаем дату по названию файл """
+
+        year = int('20' + filename[0:2])
+        month = int(filename[3:5])
+        day = int(filename[6:8])
+
+        return datetime.date(year, month, day)
+
+    @staticmethod
+    def filetoweek(filename):
+        """ Получаем номер недели по названию файла """
+
+        year = int('20' + filename[0:2])
+        month = int(filename[3:5])
+        day = int(filename[6:8])
+
+        return datetime.date(year, month, day).isocalendar()[1]
 
 
 def copyfile(serverfile, workfile):
@@ -25,26 +72,6 @@ def copyfile(serverfile, workfile):
 
     shutil.copyfile(serverfile, workfile)
     logging.info('copying {}'.format(workfile))
-
-
-def filetodate(filename):
-    """ Получаем дату по названию файл """
-
-    year = int('20' + filename[0:2])
-    month = int(filename[3:5])
-    day = int(filename[6:8])
-
-    return datetime.date(year, month, day)
-
-
-def filetoweek(filename):
-    """ Получаем номер недели по названию файла """
-
-    year = int('20' + filename[0:2])
-    month = int(filename[3:5])
-    day = int(filename[6:8])
-
-    return datetime.date(year, month, day).isocalendar()[1]
 
 
 def time_gen(start, end, delta):
@@ -56,7 +83,7 @@ def time_gen(start, end, delta):
         curr += delta
 
 
-week = filetoweek(file_name)
+week = DateFormat.filetoweek(file_name)
 year_now = '{:%Y}'.format(datetime.datetime.today())
 
 for res in time_gen((datetime.datetime.today() - datetime.timedelta(weeks=50)), datetime.datetime.today(),

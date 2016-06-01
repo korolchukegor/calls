@@ -37,7 +37,7 @@ def read_base50(dept, weeks_start, weeks_end):
                       (key, day_start, day_end))
             for j in c.fetchall():
                 dept[key].append(int(j[0]))
-
+# TODO fetchone
     conn.close()
 
 

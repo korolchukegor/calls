@@ -3,6 +3,7 @@
 import sqlite3
 import logging
 
+# TODO делать шифрование SQLCipher
 
 class Database_manager:
     """ Класс для управления записями в базу """

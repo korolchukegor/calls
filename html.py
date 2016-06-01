@@ -2,11 +2,13 @@
 
 import sqlite3
 import logging
+import files
 
 
-def callsbyday(day, dept):
+def callsbyday(day_report, dept):
     """ Чтение данных за прошлый день из базы """
 
+    day = files.DateFormat.calls_date(day_report)
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute("SELECT count(DISTINCT num) FROM calls WHERE datetime == (?) AND department == (?)", (day, dept))

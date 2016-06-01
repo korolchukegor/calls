@@ -6,8 +6,8 @@ import requests
 import logging
 import sqlite3
 import re
-import datetime
-import time
+import files
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -23,8 +23,10 @@ nfz = {'nfz': config['yandex_direct']['nfz'].split(',')}
 insurance = {'insurance': config['yandex_direct']['insurance'].split(',')}
 
 
-def check_direct(dept, date, compaign_type):
+def check_direct(dept, date_report, compaign_type):
     """ Получение данных из Яндекс.Директ и добавление в базу """
+
+    date = files.DateFormat.calls_date(date_report)
 
     compaign = {'type': compaign_type, 'shows': [], 'clicks': [], 'sum': []}
 
@@ -64,14 +66,14 @@ def check_direct(dept, date, compaign_type):
     try:
         conn = sqlite3.connect('dbtel.db')
         c = conn.cursor()
-        id = re.sub(r'[- :]', '', date) + str(int(time.mktime(datetime.datetime.now().timetuple())))
+        id = re.sub(r'[- :]', '', date) + list(dept.keys())[0] + compaign_type
 
         c.execute("INSERT OR IGNORE INTO direct VALUES (?, ?, ?, ?, ?, ?, ?)",
-                  (int(id), date, compaign['type'], list(dept.keys())[0],
+                  (id, date, compaign['type'], list(dept.keys())[0],
                    sum(compaign['shows']),
                    sum(compaign['clicks']),
                    round(sum(compaign['sum']) * 30)))
-        time.sleep(1)
+
         conn.commit()
         conn.close()
         logging.info('Direct data added OK')

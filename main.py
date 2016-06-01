@@ -7,13 +7,18 @@ import send_email
 import files
 import logging
 import direct
+import calltouch
+
 
 if __name__ == '__main__':
+    date_report = files.day_before
 
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
-                        level=logging.DEBUG,
-                        filename=u'log.log')
+                        level=logging.DEBUG, filename=u'log.log')
     logging.info('SCRIPT STARTS')
+
+    calltouch.calltouch_leads_request(date_report)
+    calltouch.calltouch_calls_request(date_report)
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
 
@@ -27,24 +32,24 @@ if __name__ == '__main__':
     index.check_phone(files.work_file, index.int_zch_nums, index.depts[5], files.week, 45)
     index.check_phone(files.work_file, index.int_ins_nums, index.depts[6], files.week, 45)
 
-    direct.check_direct(direct.service, files.date_day_before, compaign_type='search')
-    direct.check_direct(direct.sales, files.date_day_before, compaign_type='search')
-    direct.check_direct(direct.tradein, files.date_day_before, compaign_type='search')
-    direct.check_direct(direct.nfz, files.date_day_before, compaign_type='search')
-    direct.check_direct(direct.insurance, files.date_day_before, compaign_type='search')
-    direct.check_direct(direct.service, files.date_day_before, compaign_type='rsya')
-    direct.check_direct(direct.sales, files.date_day_before, compaign_type='rsya')
-    direct.check_direct(direct.tradein, files.date_day_before, compaign_type='rsya')
-    direct.check_direct(direct.nfz, files.date_day_before, compaign_type='rsya')
-    direct.check_direct(direct.insurance, files.date_day_before, compaign_type='rsya')
+    direct.check_direct(direct.service, date_report, compaign_type='search')
+    direct.check_direct(direct.sales, date_report, compaign_type='search')
+    direct.check_direct(direct.tradein, date_report, compaign_type='search')
+    direct.check_direct(direct.nfz, date_report, compaign_type='search')
+    direct.check_direct(direct.insurance, date_report, compaign_type='search')
+    direct.check_direct(direct.service, date_report, compaign_type='rsya')
+    direct.check_direct(direct.sales, date_report, compaign_type='rsya')
+    direct.check_direct(direct.tradein, date_report, compaign_type='rsya')
+    direct.check_direct(direct.nfz, date_report, compaign_type='rsya')
+    direct.check_direct(direct.insurance, date_report, compaign_type='rsya')
 
-    html.make_html('template', plot.plot_url, html.callsbyday(files.date_day_before, index.depts[0]),
-                   html.callsbyday(files.date_day_before, index.depts[1]),
-                   html.callsbyday(files.date_day_before, index.depts[2]),
-                   html.callsbyday(files.date_day_before, index.depts[3]),
-                   html.callsbyday(files.date_day_before, index.depts[4]),
-                   html.callsbyday(files.date_day_before, index.depts[5]),
-                   html.callsbyday(files.date_day_before, index.depts[6]))
+    html.make_html('template', plot.plot_url, html.callsbyday(date_report, index.depts[0]),
+                   html.callsbyday(date_report, index.depts[1]),
+                   html.callsbyday(date_report, index.depts[2]),
+                   html.callsbyday(date_report, index.depts[3]),
+                   html.callsbyday(date_report, index.depts[4]),
+                   html.callsbyday(date_report, index.depts[5]),
+                   html.callsbyday(date_report, index.depts[6]))
 
     send_email.send_mail(html.html_text, files.day_before, files.week, 'template')
     logging.info('DAILY SCRIPT ENDS')
