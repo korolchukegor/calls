@@ -60,7 +60,7 @@ def check_phone(file, int_dept_nums, dept, week, time):
 
             except ValueError:
                 logging.warning(u'wrong number - {}'.format(i[3]))
-    logging.info('{} checked and added to base'.format(dept))
+    logging.debug('{} checked and added to base'.format(dept))
     conn.commit()
     conn.close()
 
@@ -124,4 +124,4 @@ def counter_days(directory):
                 date = files_list[indx]
                 copy_and_add(files_list_lost, date, files_list[indx + 1])
 
-        logging.info('all files are in the {}'.format(directory))
+        logging.debug('all files are in the {}'.format(directory))

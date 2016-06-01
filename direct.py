@@ -57,7 +57,7 @@ def check_direct(dept, date_report, compaign_type):
                 compaign['clicks'].append(i["ClicksContext"])
                 compaign['sum'].append(i["SumContext"])
 
-        logging.info('Direct request {} OK'.format(date))
+        logging.debug('Direct request {} OK'.format(date))
 
     except KeyError:
         logging.warning('Direct request problem')
@@ -76,7 +76,7 @@ def check_direct(dept, date_report, compaign_type):
 
         conn.commit()
         conn.close()
-        logging.info('Direct data added OK')
+        logging.debug('Direct data added OK')
     except sqlite3.Error as e:
         logging.warning('Error with adding to DB - {}'.format(e.args[0]))
 

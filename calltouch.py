@@ -46,7 +46,8 @@ def calltouch_leads_request(date_report):
             c = conn.cursor()
             type = 'lead'
             lead_id = int(i['requestNumber'])
-            date = i['dateStr']
+            date = i['dateStr'].split(' ')[0]
+            time = i['dateStr'].split(' ')[1]
             subject = i['subject']
             source = i['order']['session']['source']
             medium = i['order']['session']['medium']
@@ -63,18 +64,18 @@ def calltouch_leads_request(date_report):
 
                 phone = tel_datatel(oldphone)
                 if phone is not None:
-                    c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                              (lead_id, date, subject, type, phone, email, source, medium, utm_content, keyword, fio,
+                    c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                              (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,
                                dept))
             except TypeError:
                 phone = 'None'
                 email = i['client']['contacts'][0]['contactValue']
-                c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                          (lead_id, date, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
+                c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                          (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
 
             conn.commit()
             conn.close()
-            logging.info('Direct data added OK')
+            logging.debug('Direct data added OK')
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args[0]))
 
@@ -107,7 +108,8 @@ def calltouch_calls_request(date_report):
             subject = 'None'
             fio = 'None'
             call_id = int(i['callId'])
-            date = i['date']
+            date = i['date'].split(' ')[0]  # TODO Дату сразу переводить в нормальный вид
+            time = i['date'].split(' ')[1]
             phone = i['callerNumber']
             source = i['source']
             medium = i['medium']
@@ -115,12 +117,12 @@ def calltouch_calls_request(date_report):
             keyword = i['keyword']
             dept = call_dept(phone, date_calls)
 
-            c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                      (call_id, date, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
+            c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                      (call_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
 
             conn.commit()
             conn.close()
-            logging.info('Direct data added OK')
+            logging.debug('Direct data added OK')
 
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args[0]))
@@ -163,7 +165,7 @@ def tel_datatel(tel_number):
     }
     request = requests.post(url_dadata, data=json.dumps(data), headers=headers)
     js = json.loads(request.text)
-    logging.info('DaDaTa status - {}'.format(request.status_code))
+    logging.debug('DaDaTa status - {}'.format(request.status_code))
     try:
         datatel = js[0]['country_code'] + js[0]['city_code'] + js[0]['number']
 

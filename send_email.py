@@ -1,13 +1,11 @@
 ﻿# coding: utf-8
 
-import os
 import uuid
 import smtplib
 import logging
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.mime.image import MIMEImage
 import configparser
 
 
@@ -23,7 +21,7 @@ def send_mail(html_text, day_before, week, template):
     toaddr = config['send_mails']['mails'].split(',')
 
     if template == 'template7':
-        img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
+        # img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
         subject = u'Отчет по звонкам за {} неделю'.format(week)
 
     else:
@@ -55,6 +53,6 @@ def send_mail(html_text, day_before, week, template):
     server.login(username, password)
     # Отправляем письмо:
     server.sendmail(fromaddr, toaddr, msg.as_string())
-    logging.info('report sent')
+    logging.debug('report sent')
     # Закрываем соединение с сервером
     server.quit()

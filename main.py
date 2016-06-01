@@ -9,12 +9,13 @@ import logging
 import direct
 import calltouch
 
+# TODO Сделать debug_mode
 
 if __name__ == '__main__':
     date_report = files.day_before
 
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
-                        level=logging.DEBUG, filename=u'log.log')
+                        level=logging.warning(), filename=u'log.log')
     logging.info('SCRIPT STARTS')
 
     calltouch.calltouch_leads_request(date_report)
@@ -43,19 +44,36 @@ if __name__ == '__main__':
     direct.check_direct(direct.nfz, date_report, compaign_type='rsya')
     direct.check_direct(direct.insurance, date_report, compaign_type='rsya')
 
-    html.make_html('template', plot.plot_url, html.callsbyday(date_report, index.depts[0]),
-                   html.callsbyday(date_report, index.depts[1]),
-                   html.callsbyday(date_report, index.depts[2]),
-                   html.callsbyday(date_report, index.depts[3]),
-                   html.callsbyday(date_report, index.depts[4]),
-                   html.callsbyday(date_report, index.depts[5]),
-                   html.callsbyday(date_report, index.depts[6]))
+    html.make_html(
+
+        template='template',
+        link=plot.plot_url,
+        serv_calls_all=html.callsbyday(date_report, index.depts[0]),
+        serv_leads=html.calltouch_by_day(date_report, index.depts[0], type='lead'),
+        serv_calls=html.calltouch_by_day(date_report, index.depts[0], type='call'),
+        sales_calls_all=html.callsbyday(date_report, index.depts[1]),
+        sales_leads=html.calltouch_by_day(date_report, index.depts[1], type='lead'),
+        sales_calls=html.calltouch_by_day(date_report, index.depts[1], type='call'),
+        tradein_calls_all=html.callsbyday(date_report, index.depts[2]),
+        tradein_leads=html.calltouch_by_day(date_report, index.depts[2], type='lead'),
+        tradein_calls=html.calltouch_by_day(date_report, index.depts[2], type='call'),
+        nfz_calls_all=html.callsbyday(date_report, index.depts[3]),
+        nfz_leads=html.calltouch_by_day(date_report, index.depts[3], type='lead'),
+        nfz_calls=html.calltouch_by_day(date_report, index.depts[3], type='call'),
+        dop_calls_all=html.callsbyday(date_report, index.depts[4]),
+        dop_leads=html.calltouch_by_day(date_report, index.depts[4], type='lead'),
+        dop_calls=html.calltouch_by_day(date_report, index.depts[4], type='call'),
+        zch_calls_all=html.callsbyday(date_report, index.depts[5]),
+        zch_leads=html.calltouch_by_day(date_report, index.depts[5], type='lead'),
+        zch_calls=html.calltouch_by_day(date_report, index.depts[5], type='call'),
+        insurance_calls_all=html.callsbyday(date_report, index.depts[6]),
+        insurance_leads=html.calltouch_by_day(date_report, index.depts[6], type='lead'),
+        insurance_calls=html.calltouch_by_day(date_report, index.depts[6], type='call'),)
 
     send_email.send_mail(html.html_text, files.day_before, files.week, 'template')
     logging.info('DAILY SCRIPT ENDS')
 
     if files.weekday == 0:
-
         logging.info('report from {} -- {}'.format(files.weeks_start[0], files.weeks_start[-1]))
         plot.read_base50(plot.servdict, files.weeks_start, files.weeks_end)
         plot.read_base50(plot.salesdict, files.weeks_start, files.weeks_end)
@@ -76,13 +94,31 @@ if __name__ == '__main__':
         plot.send_data_plot()
         plot.create_dashboard(plot.plot_url)
 
-        html.make_html('template7', plot.plot_url, html.callsbyweek(index.depts[0], files.year_now, files.week),
-                       html.callsbyweek(index.depts[1], files.year_now, files.week),
-                       html.callsbyweek(index.depts[2], files.year_now, files.week),
-                       html.callsbyweek(index.depts[3], files.year_now, files.week),
-                       html.callsbyweek(index.depts[4], files.year_now, files.week),
-                       html.callsbyweek(index.depts[5], files.year_now, files.week),
-                       html.callsbyweek(index.depts[6], files.year_now, files.week))
+        html.make_html(
+
+            template='template7',
+            link=plot.plot_url,
+            serv_calls_all=html.callsbyweek(index.depts[0], files.year_now, files.week),
+            serv_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[0], type='lead'),
+            serv_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[0], type='call'),
+            sales_calls_all=html.callsbyweek(index.depts[1], files.year_now, files.week),
+            sales_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[1], type='lead'),
+            sales_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[1], type='call'),
+            tradein_calls_all=html.callsbyweek(index.depts[2], files.year_now, files.week),
+            tradein_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[2], type='lead'),
+            tradein_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[2], type='call'),
+            nfz_calls_all=html.callsbyweek(index.depts[3], files.year_now, files.week),
+            nfz_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[3], type='lead'),
+            nfz_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[3], type='call'),
+            dop_calls_all=html.callsbyweek(index.depts[4], files.year_now, files.week),
+            dop_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[4], type='lead'),
+            dop_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[4], type='call'),
+            zch_calls_all=html.callsbyweek(index.depts[5], files.year_now, files.week),
+            zch_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[5], type='lead'),
+            zch_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[5], type='call'),
+            insurance_calls_all=html.callsbyweek(index.depts[6], files.year_now, files.week),
+            insurance_leads=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[6], type='lead'),
+            insurance_calls=html.calltouch_by_week(files.day_before, files.seven_days_before,  index.depts[6], type='call'), )
 
         send_email.send_mail(html.html_text, files.day_before, files.week, 'template7')
         logging.info('WEEKLY SCRIPT ENDS')

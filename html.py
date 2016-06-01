@@ -32,10 +32,66 @@ def callsbyweek(dept, year, week):
     conn.close()
 
 
-def make_html(template, link, serv, sales, tradein, nfz, dop, zch, ins):
+def calltouch_by_day(date_report, dept, type):
+    """ Чтение данных о заявках за прошлый день из базы """
+
+    date = files.DateFormat.calltouch_calls(date_report)
+    conn = sqlite3.connect('dbtel.db')
+    c = conn.cursor()
+    c.execute(
+        "SELECT count(DISTINCT id) FROM calltouch WHERE dept == (?) AND type == (?) AND date == (?)",
+        (dept, type, date))
+    return c.fetchone()[0]
+
+
+def calltouch_by_week(date_start, date_end, dept, type):
+    """ Чтение данных о заявках за прошлую неделю день из базы """
+
+    date_start = files.DateFormat.calltouch_calls(date_start)
+    date_end = files.DateFormat.calltouch_calls(date_end)
+
+    conn = sqlite3.connect('dbtel.db')
+    c = conn.cursor()
+    c.execute(
+        "SELECT count(DISTINCT id) FROM calltouch WHERE dept == (?) AND type == (?) AND date BETWEEN (?) AND (?)",
+        (dept, type, date_start, date_end))
+    return c.fetchone()[0]
+
+
+def make_html(template, link,
+              serv_calls_all, serv_leads, serv_calls,
+              sales_calls_all, sales_leads, sales_calls,
+              tradein_calls_all, tradein_leads, tradein_calls,
+              nfz_calls_all, nfz_leads, nfz_calls,
+              dop_calls_all, dop_leads, dop_calls,
+              zch_calls_all, zch_leads, zch_calls,
+              insurance_calls_all, insurance_leads, insurance_calls):
+    # TODO Сделать красиво (args)
     """ Формирование html по шаблону """
 
     global html_text
+
     with open('{}.html'.format(template), 'r', encoding='utf-8') as tp:
-        html_text = tp.read().format(link, serv, sales, tradein, nfz, dop, zch, ins)
+        html_text = tp.read().format(link=link,
+                                     serv_calls_all=serv_calls_all,
+                                     serv_leads=serv_leads,
+                                     serv_calls=serv_calls,
+                                     sales_calls_all=sales_calls_all,
+                                     sales_leads=sales_leads,
+                                     sales_calls=sales_calls,
+                                     tradein_calls_all=tradein_calls_all,
+                                     tradein_leads=tradein_leads,
+                                     tradein_calls=tradein_calls,
+                                     nfz_calls_all=nfz_calls_all,
+                                     nfz_leads=nfz_leads,
+                                     nfz_calls=nfz_calls,
+                                     dop_calls_all=dop_calls_all,
+                                     dop_leads=dop_leads,
+                                     dop_calls=dop_calls,
+                                     zch_calls_all=zch_calls_all,
+                                     zch_leads=zch_leads,
+                                     zch_calls=zch_calls,
+                                     insurance_calls_all=insurance_calls_all,
+                                     insurance_leads=insurance_leads,
+                                     insurance_calls=insurance_calls)
     logging.info('html OK')
