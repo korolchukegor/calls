@@ -4,10 +4,10 @@ import os
 import csv
 import sqlite3
 import datetime
-import re
 import files
 import logging
 import configparser
+
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -18,7 +18,6 @@ int_nfz_nums = list(map(int, config['int_dept_nums']['nfz'].split(',')))
 int_dop_nums = list(map(int, config['int_dept_nums']['dop'].split(',')))
 int_zch_nums = list(map(int, config['int_dept_nums']['zch'].split(',')))
 int_ins_nums = list(map(int, config['int_dept_nums']['insurance'].split(',')))
-
 
 depts = [
 
@@ -34,7 +33,7 @@ depts = [
 
 def check_phone(file, int_dept_nums, dept, week, time):
     """ Фильтрация csv-файла со звонками """
-
+    # TODO Переписать для одной общей таблицы
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS calls(id TEXT UNIQUE,
@@ -51,31 +50,28 @@ def check_phone(file, int_dept_nums, dept, week, time):
                 i[3] = u'2447788'
             elif i[2] == u'НеваСервис':
                 i[2] = u'2447778'
-            idnum = re.sub(r'[- :]', '', i[0]) + i[2] + i[3]
 
             try:
                 if i[1] == u'RX' and int(i[3]) in int_dept_nums and int(i[4]) >= time:
-                    c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (idnum, i[0][0:10],
+                    c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (i[7], i[0].split(' ')[0],
                                                                                      week, dept, i[2]))
 
             except ValueError:
                 logging.warning(u'wrong number - {}'.format(i[3]))
+
+            if len(i[3]) == 7:
+                i[3] = '8812' + i[3]
+            try:
+                if i[1] == u'TX':
+                    c.execute("INSERT OR IGNORE INTO calls_out VALUES (?, ?, ?, ?, ?)", (i[7], i[0].split(' ')[0],
+                                                                                         i[0].split(' ')[1], i[3], i[4]))
+            except ValueError:
+                logging.warning(u'calls_back problem'.format(i[3]))
+
     logging.debug('{} checked and added to base'.format(dept))
     conn.commit()
     conn.close()
 
-
-def read_base():
-    """ Вывод всех данных из базы """
-
-    conn = sqlite3.connect(u'dbtel.db')
-    c = conn.cursor()
-
-    c.execute("SELECT * FROM calls")
-    for j in c.fetchall():
-        print(j)
-
-    conn.close()
 
 
 def copy_and_add(lst, date_start, date_end):
@@ -101,6 +97,7 @@ def copy_and_add(lst, date_start, date_end):
 
 def counter_days(directory):
     """ Первый запуск и проверка, не пропущены ли дни """
+    # TODO сделать проверку не по папке, а по базе
 
     files_list = []
     files_list_lost = []

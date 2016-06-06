@@ -66,6 +66,16 @@ class DateFormat:
 
         return datetime.date(year, month, day).isocalendar()[1]
 
+    @staticmethod
+    def normal_date_calltouch(date):
+        """ Приведение даты в формате коллтач к нормальному виду """
+
+        year = int(date.split('/')[2])
+        month = int(date.split('/')[1])
+        day = int(date.split('/')[0])
+
+        return datetime.date(year, month, day)
+
 
 def copyfile(serverfile, workfile):
     """ Копируем файл на локальную машину """

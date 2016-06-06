@@ -35,28 +35,32 @@ def callsbyweek(dept, year, week):
 def calltouch_by_day(date_report, dept, type):
     """ Чтение данных о заявках за прошлый день из базы """
 
-    date = files.DateFormat.calltouch_calls(date_report)
+    date = files.DateFormat.calls_date(date_report)
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute(
         "SELECT count(DISTINCT id) FROM calltouch WHERE dept == (?) AND type == (?) AND date == (?)",
         (dept, type, date))
-    return c.fetchone()[0]
+    result = c.fetchone()[0]
+    conn.close()
+    return result
 
 
 def calltouch_by_week(date_start, date_end, dept, type):
     """ Чтение данных о заявках за прошлую неделю день из базы """
 
-    date_start = files.DateFormat.calltouch_calls(date_start)
-    date_end = files.DateFormat.calltouch_calls(date_end)
+    date_start = files.DateFormat.calls_date(date_start)
+    date_end = files.DateFormat.calls_date(date_end)
 
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute(
         "SELECT count(DISTINCT id) FROM calltouch WHERE dept == (?) AND type == (?) AND date BETWEEN (?) AND (?)",
         (dept, type, date_start, date_end))
-    return c.fetchone()[0]
+    result = c.fetchone()[0]
 
+    conn.close()
+    return result
 
 def make_html(template, link,
               serv_calls_all, serv_leads, serv_calls,

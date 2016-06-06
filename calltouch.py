@@ -25,6 +25,7 @@ secret_dadata = config['dadata']['secret']
 
 def calltouch_leads_request(date_report):
     """ Запрос данных по заявкам в Calltouch """
+    # TODO Все запросы json через try except
 
     check_date = files.DateFormat.calltouch_leads(date_report)
 
@@ -46,7 +47,7 @@ def calltouch_leads_request(date_report):
             c = conn.cursor()
             type = 'lead'
             lead_id = int(i['requestNumber'])
-            date = i['dateStr'].split(' ')[0]
+            date = files.DateFormat.normal_date_calltouch(i['dateStr'].split(' ')[0])
             time = i['dateStr'].split(' ')[1]
             subject = i['subject']
             source = i['order']['session']['source']
@@ -108,7 +109,7 @@ def calltouch_calls_request(date_report):
             subject = 'None'
             fio = 'None'
             call_id = int(i['callId'])
-            date = i['date'].split(' ')[0]  # TODO Дату сразу переводить в нормальный вид
+            date = files.DateFormat.normal_date_calltouch(i['date'].split(' ')[0])
             time = i['date'].split(' ')[1]
             phone = i['callerNumber']
             source = i['source']
@@ -116,6 +117,7 @@ def calltouch_calls_request(date_report):
             utm_content = bannerid_compaignid(i['utmContent'])
             keyword = i['keyword']
             dept = call_dept(phone, date_calls)
+
 
             c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                       (call_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
@@ -206,8 +208,9 @@ def call_dept(phone, date):
     try:
         c.execute("SELECT department FROM calls WHERE num == (?) AND datetime == (?)", (phone, date))
         dept = c.fetchone()[0]
+        logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
     except TypeError:
         dept = 'other'
-
+        logging.debug('typeerror - {} is moving to other'.format(phone))
     conn.close()
     return dept
