@@ -4,41 +4,62 @@
     <title>Статистика по звонкам</title>
 </head>
 <body>
-    <p>График звонков по неделям - <a href="{0}">Просмотреть</a></p>
-		<table>
-	<tr>
-            <td><b>Cервис(уникальные)</b></td>
-            <td>{1}</td>
+    <p>График звонков по неделям - <a href="{link}">Просмотреть</a></p>
+		<table border="1">
+        <tr>
+            <td><b>Отдел</b></td>
+            <td>Всего звонков(уникальные)</td>
+            <td>Заявки с сайта(уникальные)</td>
+            <td>Звонки с сайта(уникальные)</td>
+
+        </tr>
+	    <tr>
+            <td><b>Cервис</b></td>
+            <td>{serv_calls_all}</td>
+            <td>{serv_leads}</td>
+            <td>{serv_calls}</td>
         </tr>
 
- 	<tr>
-            <td><b>Продажи(уникальные)</b></td>
-            <td>{2}</td>
+ 	    <tr>
+            <td><b>Продажи</b></td>
+            <td>{sales_calls_all}</td>
+            <td>{sales_leads}</td>
+            <td>{sales_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Trade-in(уникальные)</b></td>
-            <td>{3}</td>
+            <td><b>Trade-in</b></td>
+            <td>{tradein_calls_all}</td>
+            <td>{tradein_leads}</td>
+            <td>{tradein_calls}</td>
         </tr>
 
         <tr>
-            <td><b>NFZ(уникальные)</b></td>
-            <td>{4}</td>
+            <td><b>NFZ</b></td>
+            <td>{nfz_calls_all}</td>
+            <td>{nfz_leads}</td>
+            <td>{nfz_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Доп.оборудование(уникальные)</b></td>
-            <td>{5}</td>
+            <td><b>Доп.оборудование</b></td>
+            <td>{dop_calls_all}</td>
+            <td>{dop_leads}</td>
+            <td>{dop_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Запчасти(уникальные)</b></td>
-            <td>{6}</td>
+            <td><b>Запчасти</b></td>
+            <td>{zch_calls_all}</td>
+            <td>{zch_leads}</td>
+            <td>{zch_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Страхование(уникальные)</b></td>
-            <td>{7}</td>
+            <td><b>Страхование</b></td>
+            <td>{insurance_calls_all}</td>
+            <td>{insurance_leads}</td>
+            <td>{insurance_calls}</td>
         </tr>
 
     	</table>

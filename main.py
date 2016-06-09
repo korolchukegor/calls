@@ -8,6 +8,7 @@ import files
 import logging
 import direct
 import calltouch
+import leads_callback
 
 # TODO Сделать debug_mode
 
@@ -17,9 +18,6 @@ if __name__ == '__main__':
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
                         level=logging.DEBUG, filename=u'log.log')
     logging.info('SCRIPT STARTS')
-
-    calltouch.calltouch_leads_request(date_report)
-    calltouch.calltouch_calls_request(date_report)
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
 
@@ -32,6 +30,9 @@ if __name__ == '__main__':
     index.check_phone(files.work_file, index.int_dop_nums, index.depts[4], files.week, 45)
     index.check_phone(files.work_file, index.int_zch_nums, index.depts[5], files.week, 45)
     index.check_phone(files.work_file, index.int_ins_nums, index.depts[6], files.week, 45)
+
+    calltouch.calltouch_leads_request(date_report)
+    calltouch.calltouch_calls_request(date_report)
 
     direct.check_direct(direct.service, date_report, compaign_type='search')
     direct.check_direct(direct.sales, date_report, compaign_type='search')
@@ -71,6 +72,7 @@ if __name__ == '__main__':
         insurance_calls=html.calltouch_by_day(date_report, index.depts[6], type='call'),)
 
     send_email.send_mail(html.html_text, files.day_before, files.week, 'template')
+    leads_callback.leads_callback(date_report)
     logging.info('DAILY SCRIPT ENDS')
 
     if files.weekday == 0:

@@ -4,40 +4,61 @@
     <title>Статистика по звонкам</title>
 </head>
 <body>
-	<table>
-	<tr>
-            <td><b>Cервис(уникальные)</b></td>
-            <td>{1}</td>
+	<table border="1">
+        <tr>
+            <td align="center"><b>Отдел</b></td>
+            <td align="center">Всего звонков(уникальные)</td>
+            <td align="center">Заявки с сайта(уникальные)</td>
+            <td align="center">Звонки с сайта(уникальные)</td>
+
+        </tr>
+	    <tr>
+            <td align="center"><b>Cервис</b></td>
+            <td align="center">{serv_calls_all}</td>
+            <td align="center">{serv_leads}</td>
+            <td align="center">{serv_calls}</td>
         </tr>
 
- 	<tr>
-            <td><b>Продажи(уникальные)</b></td>
-            <td>{2}</td>
+ 	    <tr>
+            <td align="center"><b>Продажи</b></td>
+            <td align="center">{sales_calls_all}</td>
+            <td align="center">{sales_leads}</td>
+            <td align="center">{sales_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Trade-in(уникальные)</b></td>
-            <td>{3}</td>
+            <td align="center"><b>Trade-in</b></td>
+            <td align="center">{tradein_calls_all}</td>
+            <td align="center">{tradein_leads}</td>
+            <td align="center">{tradein_calls}</td>
         </tr>
 
         <tr>
-            <td><b>NFZ(уникальные)</b></td>
-            <td>{4}</td>
+            <td align="center"><b>NFZ</b></td>
+            <td align="center">{nfz_calls_all}</td>
+            <td align="center">{nfz_leads}</td>
+            <td align="center">{nfz_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Доп.оборудование(уникальные)</b></td>
-            <td>{5}</td>
+            <td align="center"><b>Доп.оборудование</b></td>
+            <td align="center">{dop_calls_all}</td>
+            <td align="center">{dop_leads}</td>
+            <td align="center">{dop_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Запчасти(уникальные)</b></td>
-            <td>{6}</td>
+            <td align="center"><b>Запчасти</b></td>
+            <td align="center">{zch_calls_all}</td>
+            <td align="center">{zch_leads}</td>
+            <td align="center">{zch_calls}</td>
         </tr>
 
         <tr>
-            <td><b>Страхование(уникальные)</b></td>
-            <td>{7}</td>
+            <td align="center"><b>Страхование/кредит</b></td>
+            <td align="center">{insurance_calls_all}</td>
+            <td align="center">{insurance_leads}</td>
+            <td align="center">{insurance_calls}</td>
         </tr>
 
     	</table>

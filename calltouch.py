@@ -23,6 +23,23 @@ token_dadata = config['dadata']['token']
 secret_dadata = config['dadata']['secret']
 
 
+def call_dept(phone, date):
+    """ Определение департамента по номеру телефона входящего зонка """
+
+    phone = '8' + str(phone)[1:]
+    conn = sqlite3.connect('dbtel.db')
+    c = conn.cursor()
+    try:
+        c.execute("SELECT department FROM calls WHERE num = (?) AND datetime = (?)", (phone, date))
+        dept = c.fetchone()[0]
+        logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
+    except TypeError as e:
+        logging.warning('{} - {} is moving to other, {}'.format(e.args[0], phone, date))
+        dept = 'other'
+    conn.close()
+    return dept
+
+
 def calltouch_leads_request(date_report):
     """ Запрос данных по заявкам в Calltouch """
     # TODO Все запросы json через try except
@@ -43,12 +60,12 @@ def calltouch_leads_request(date_report):
     for i in jdata:
         # TODO Все операции с базой в отдельный модуль
         try:
-            conn = sqlite3.connect('dbtel.db')
-            c = conn.cursor()
             type = 'lead'
             lead_id = int(i['requestNumber'])
             date = files.DateFormat.normal_date_calltouch(i['dateStr'].split(' ')[0])
             time = i['dateStr'].split(' ')[1]
+            deadline = files.DateFormat.leads_deadline(i['dateStr'])
+            status = 'Not called'
             subject = i['subject']
             source = i['order']['session']['source']
             medium = i['order']['session']['medium']
@@ -56,27 +73,30 @@ def calltouch_leads_request(date_report):
             keyword = i['order']['session']['keywords']
             fio = i['client']['fio']
             dept = subject_dept(i['subject'])
-
+            conn = sqlite3.connect('dbtel.db')
+            c = conn.cursor()
             try:
-                email = 'None'
+                email = None
                 oldphone = i['client']['phones'][0]['phoneNumber']
                 if len(oldphone) == 7:
                     oldphone = '812' + oldphone
 
                 phone = tel_datatel(oldphone)
                 if phone is not None:
-                    c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                              (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,
-                               dept))
+                    c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                              (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword,
+                               fio,
+                               dept, deadline, status))
             except TypeError:
-                phone = 'None'
+                phone = None
                 email = i['client']['contacts'][0]['contactValue']
-                c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                          (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
+                c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                          (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,
+                           dept, deadline, status))
 
             conn.commit()
             conn.close()
-            logging.debug('Direct data added OK')
+            logging.debug('Calltouch leads added OK')
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args[0]))
 
@@ -101,13 +121,14 @@ def calltouch_calls_request(date_report):
     for i in jdata:
 
         try:
-            conn = sqlite3.connect('dbtel.db')
-            c = conn.cursor()
+
 
             type = 'call'
-            email = 'None'
-            subject = 'None'
-            fio = 'None'
+            email = None
+            subject = None
+            fio = None
+            deadline = None
+            status = None
             call_id = int(i['callId'])
             date = files.DateFormat.normal_date_calltouch(i['date'].split(' ')[0])
             time = i['date'].split(' ')[1]
@@ -117,14 +138,15 @@ def calltouch_calls_request(date_report):
             utm_content = bannerid_compaignid(i['utmContent'])
             keyword = i['keyword']
             dept = call_dept(phone, date_calls)
-
-
-            c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                      (call_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio, dept))
+            conn = sqlite3.connect('dbtel.db')
+            c = conn.cursor()
+            c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                      (call_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,
+                       dept, deadline, status))
 
             conn.commit()
             conn.close()
-            logging.debug('Direct data added OK')
+            logging.debug('Calltouch calls added OK')
 
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args[0]))
@@ -197,20 +219,3 @@ def subject_dept(subject):
 
     else:
         return 'other'
-
-
-def call_dept(phone, date):
-    """ Определение департамента по номеру телефона входящего зонка """
-
-    phone = '8' + str(phone)[1:]
-    conn = sqlite3.connect('dbtel.db')
-    c = conn.cursor()
-    try:
-        c.execute("SELECT department FROM calls WHERE num == (?) AND datetime == (?)", (phone, date))
-        dept = c.fetchone()[0]
-        logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
-    except TypeError:
-        dept = 'other'
-        logging.debug('typeerror - {} is moving to other'.format(phone))
-    conn.close()
-    return dept

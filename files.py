@@ -76,6 +76,30 @@ class DateFormat:
 
         return datetime.date(year, month, day)
 
+    @staticmethod
+    def leads_deadline(date_time):
+        """ Формирование дедлайна по заявке """
+        # i['dateStr']
+        date = date_time.split(' ')[0]
+        time = date_time.split(' ')[1]
+
+        dt_lead = datetime.datetime(year=int(date.split('/')[2]), month=int(date.split('/')[1]),
+                                    day=int(date.split('/')[0]), hour=int(time.split(':')[0]),
+                                    minute=int(time.split(':')[1]), second=int(time.split(':')[2]))
+
+        if dt_lead < datetime.datetime(year=int(date.split('/')[2]), month=int(date.split('/')[1]),
+                                       day=int(date.split('/')[0]), hour=9, minute=0, second=0):
+            deadline = datetime.datetime(year=int(date.split('/')[2]), month=int(date.split('/')[1]),
+                                         day=int(date.split('/')[0]), hour=10, minute=0, second=0)
+        elif dt_lead > datetime.datetime(year=int(date.split('/')[2]), month=int(date.split('/')[1]),
+                                         day=int(date.split('/')[0]), hour=20, minute=0, second=0):
+            deadline = datetime.datetime(year=int(date.split('/')[2]), month=int(date.split('/')[1]),
+                                         day=int(date.split('/')[0]), hour=10, minute=0, second=0) + datetime.timedelta(
+                days=1)
+        else:
+            deadline = dt_lead + datetime.timedelta(hours=1)
+        return deadline
+
 
 def copyfile(serverfile, workfile):
     """ Копируем файл на локальную машину """
