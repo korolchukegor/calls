@@ -7,6 +7,9 @@ import datetime
 import files
 import logging
 import configparser
+import db
+import direct
+import calltouch
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -37,7 +40,7 @@ def check_phone(file, int_dept_nums, dept, week, time):
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS calls(id TEXT UNIQUE,
-                                                    datetime TEXT,
+                                                    date TEXT,
                                                     week INTEGER,
                                                     department TEXT,
                                                     num INTEGER)''')
@@ -64,7 +67,8 @@ def check_phone(file, int_dept_nums, dept, week, time):
             try:
                 if i[1] == u'TX':
                     c.execute("INSERT OR IGNORE INTO calls_out VALUES (?, ?, ?, ?, ?)", (i[7], i[0].split(' ')[0],
-                                                                                         i[0].split(' ')[1], i[3], i[4]))
+                                                                                         i[0].split(' ')[1], i[3],
+                                                                                         i[4]))
             except ValueError:
                 logging.warning(u'calls_back problem'.format(i[3]))
 
@@ -73,52 +77,88 @@ def check_phone(file, int_dept_nums, dept, week, time):
     conn.close()
 
 
-
-def copy_and_add(lst, date_start, date_end):
+def copy_and_add(date_start, date_end, table):
     """ Копирование и обработка файлов """
 
-    while True:
-        date_start = date_start + datetime.timedelta(days=1)
-        if date_start == date_end:
-            break
-        lst.append('{:%y_%m_%d}.csv'.format(date_start))
+    lst = []
+    if table == 'calls':
+        while True:
+            date_start = date_start + datetime.timedelta(days=1)
+            if date_start == date_end:
+                break
+            lst.append('{:%y_%m_%d}.csv'.format(date_start))
 
-    for file in lst:
-        week = files.DateFormat.filetoweek(file)
-        files.copyfile(files.server_dir + file, files.directory + file)
-        check_phone(files.directory + file, int_serv_nums, depts[0], week, 25)
-        check_phone(files.directory + file, int_sales_nums, depts[1], week, 60)
-        check_phone(files.directory + file, int_tradein_nums, depts[2], week, 45)
-        check_phone(files.directory + file, int_nfz_nums, depts[3], week, 45)
-        check_phone(files.directory + file, int_dop_nums, depts[4], week, 45)
-        check_phone(files.directory + file, int_zch_nums, depts[5], week, 45)
-        check_phone(files.directory + file, int_ins_nums, depts[6], week, 45)
+        for file in lst:
+            week = files.DateFormat.filetoweek(file)
+            files.copyfile(files.server_dir + file, files.directory + file)
+            check_phone(files.directory + file, int_serv_nums, depts[0], week, 25)
+            check_phone(files.directory + file, int_sales_nums, depts[1], week, 60)
+            check_phone(files.directory + file, int_tradein_nums, depts[2], week, 45)
+            check_phone(files.directory + file, int_nfz_nums, depts[3], week, 45)
+            check_phone(files.directory + file, int_dop_nums, depts[4], week, 45)
+            check_phone(files.directory + file, int_zch_nums, depts[5], week, 45)
+            check_phone(files.directory + file, int_ins_nums, depts[6], week, 45)
+
+    elif table == 'direct':
+
+        while True:
+            date_start = date_start + datetime.timedelta(days=1)
+            if date_start == date_end:
+                break
+            lst.append(date_start)
+
+        for date in lst:
+            direct.check_direct(direct.service, date, compaign_type='search')
+            direct.check_direct(direct.sales, date, compaign_type='search')
+            direct.check_direct(direct.tradein, date, compaign_type='search')
+            direct.check_direct(direct.nfz, date, compaign_type='search')
+            direct.check_direct(direct.insurance, date, compaign_type='search')
+            direct.check_direct(direct.service, date, compaign_type='rsya')
+            direct.check_direct(direct.sales, date, compaign_type='rsya')
+            direct.check_direct(direct.tradein, date, compaign_type='rsya')
+            direct.check_direct(direct.nfz, date, compaign_type='rsya')
+            direct.check_direct(direct.insurance, date, compaign_type='rsya')
+
+    elif table == 'calltouch':
+        while True:
+            date_start = date_start + datetime.timedelta(days=1)
+            if date_start == date_end:
+                break
+            lst.append(date_start)
+
+        for date in lst:
+            calltouch.calltouch_leads_request(date)
+            calltouch.calltouch_calls_request(date)
 
 
-def counter_days(directory):
+
+
+def base_days_lost(table):
     """ Первый запуск и проверка, не пропущены ли дни """
-    # TODO сделать проверку не по папке, а по базе
 
-    files_list = []
-    files_list_lost = []
-    files_list_lastyear = []
+    data_base = db.Database_manager()
+    data_base.query("SELECT count(DISTINCT date) FROM {}".format(table))
+    result = data_base.result()
 
-    if len(os.listdir(directory)) <= 1:
-        logging.warning('directory is empty')
+    if result[0] <= 1:
+
+        logging.warning('{} table is empty'.format(table))
         date_last_year = datetime.datetime.today() - datetime.timedelta(days=365)
         date_of_file = datetime.datetime.today()
-        copy_and_add(files_list_lastyear, date_last_year, date_of_file)
+        copy_and_add(date_last_year, date_of_file, table)
 
     else:
-        for file in os.listdir(directory):
-            if len(file) == 12:
-                date_file = files.DateFormat.filetodate(file)
-                files_list.append(date_file)
+        data_base.query("SELECT DISTINCT date FROM {} ORDER BY date ASC".format(table))
+        call_list = data_base.result_all()
 
-        for indx in range(len(files_list) - 1):
-            if files_list[indx + 1] - datetime.timedelta(days=1) != files_list[indx]:
-                logging.warning('some files lost')
-                date = files_list[indx]
-                copy_and_add(files_list_lost, date, files_list[indx + 1])
+        for index in range(len(call_list) - 1):
+            date_index = files.DateFormat.db_date_normal(call_list[index])
+            next_date_index = files.DateFormat.db_date_normal(call_list[index + 1])
 
-        logging.debug('all files are in the {}'.format(directory))
+            if next_date_index - datetime.timedelta(days=1) != date_index:
+                logging.warning('dates between {} and {} are lost'.format(date_index, next_date_index))
+                copy_and_add(date_index, next_date_index, table)
+
+        logging.debug('all dates are in the {}'.format(table))
+
+

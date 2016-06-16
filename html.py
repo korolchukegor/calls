@@ -11,7 +11,7 @@ def callsbyday(day_report, dept):
     day = files.DateFormat.calls_date(day_report)
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
-    c.execute("SELECT count(DISTINCT num) FROM calls WHERE datetime = (?) AND department = (?)", (day, dept))
+    c.execute("SELECT count(DISTINCT num) FROM calls WHERE date = (?) AND department = (?)", (day, dept))
     for i in c.fetchall():
         return i[0]
 
@@ -24,7 +24,7 @@ def callsbyweek(dept, year, week):
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute(
-        "SELECT count(DISTINCT num) FROM calls WHERE department = (?) AND datetime LIKE '{}%' "
+        "SELECT count(DISTINCT num) FROM calls WHERE department = (?) AND date LIKE '{}%' "
         "AND week == (?)".format(year), (dept, week))
     for i in c.fetchall():
         return i[0]

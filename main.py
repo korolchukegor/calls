@@ -21,8 +21,9 @@ if __name__ == '__main__':
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
 
-    index.counter_days(files.directory)
-    # TODO проверку на пропуск дней для direct и calltouch
+    index.base_days_lost(table='calls')
+    index.base_days_lost(table='calltouch')
+    index.base_days_lost(table='direct')
     index.check_phone(files.work_file, index.int_serv_nums, index.depts[0], files.week, 25)
     index.check_phone(files.work_file, index.int_sales_nums, index.depts[1], files.week, 60)
     index.check_phone(files.work_file, index.int_tradein_nums, index.depts[2], files.week, 45)

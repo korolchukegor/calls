@@ -30,7 +30,7 @@ def call_dept(phone, date):
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     try:
-        c.execute("SELECT department FROM calls WHERE num = (?) AND datetime = (?)", (phone, date))
+        c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date))
         dept = c.fetchone()[0]
         logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
     except TypeError as e:
@@ -149,7 +149,7 @@ def calltouch_calls_request(date_report):
             logging.debug('Calltouch calls added OK')
 
         except sqlite3.Error as e:
-            logging.warning('Error with adding to DB - {}'.format(e.args[0]))
+            logging.warning('Error with adding to DB - {}'.format(e.args))
 
 
 def bannerid_compaignid(bannerid):
@@ -175,7 +175,7 @@ def bannerid_compaignid(bannerid):
 
 
 def tel_datatel(tel_number):
-    """ Преобразование омер телефона в нормальный формат """
+    """ Преобразование номера телефона в нормальный формат """
 
     data = [tel_number]
 

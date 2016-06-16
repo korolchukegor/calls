@@ -13,7 +13,7 @@ def leads_callback(date_report):
     c = conn.cursor()
     fileheader = 'Проверка {}\n'.format(date_report)
     date_calls = files.DateFormat.calls_date(date_report)
-    with open('{}.txt'.format(date_calls), 'a') as txtfile:
+    with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
         txtfile.write(fileheader + '\n')
     type = 'lead'
     c.execute(
@@ -67,11 +67,7 @@ def leads_callback(date_report):
             status = 'Некорректный номер телефона'
 
         status_txt = status + '\n'
-        with open('callback - {}.txt'.format(date_calls), 'a') as txtfile:
-            txtfile.write('{}\n{}\n{}\n{}\n{}\n'.format(leadheader,
-                                                        dt_lead_txt,
-                                                        deadline_txt,
-                                                        datetime_call_txt,
-                                                        status_txt))
+        with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
+            txtfile.write('{}\n{}\n{}\n{}\n'.format(leadheader, dt_lead_txt, deadline_txt, status_txt))
 
     conn.close()
