@@ -33,7 +33,7 @@ def read_base50(dept, weeks_start, weeks_end):
     c = conn.cursor()
     for key in dept:
         for day_start, day_end in zip(weeks_start, weeks_end):
-            c.execute("SELECT count(DISTINCT num) FROM calls WHERE department = (?) AND datetime BETWEEN (?) AND (?)",
+            c.execute("SELECT count(DISTINCT num) FROM calls WHERE department = (?) AND date BETWEEN (?) AND (?)",
                       (key, day_start, day_end))
             for j in c.fetchall():
                 dept[key].append(int(j[0]))

@@ -1,11 +1,13 @@
 ﻿# coding: utf-8
 
-import uuid
+import os
+import files
 import smtplib
 import logging
 from email.header import Header
-from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.application import MIMEApplication
 import configparser
 
 
@@ -13,7 +15,7 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 
-def send_mail(html_text, day_before, week, template):
+def send_mail(html_text, date_report, week, template):
     """ Формирование письма для рассылки """
 
     # TODO Сделать, чтобы во всех почтовых клиентах график был в шаблоне, а не во вложении
@@ -21,12 +23,12 @@ def send_mail(html_text, day_before, week, template):
     toaddr = config['send_mails']['mails'].split(',')
 
     if template == 'template7':
-        # img = dict(title=u'Picture report…', path=u'spirit.png', cid=str(uuid.uuid4()))
+        file = u''
         subject = u'Отчет по звонкам за {} неделю'.format(week)
 
     else:
-        img = dict(title=u'Picture report…', path='', cid=str(uuid.uuid4()))
-        subject = u'Отчет по звонкам за {}'.format('{:%d-%m-%y}'.format(day_before))
+        file = u'{}\\callback_report\\callback - {}.txt'.format(os.getcwd(), files.DateFormat.calls_date(date_report))
+        subject = u'Отчет по звонкам за {}'.format(files.DateFormat.calls_date(date_report))
 
     msg = MIMEMultipart('related')
     msg['Subject'] = Header(subject.encode('utf-8'), 'UTF-8').encode()
@@ -39,6 +41,15 @@ def send_mail(html_text, day_before, week, template):
 
     htmlpart = MIMEText(html_text.encode('utf-8'), 'html', 'UTF-8')
     msg_alternative.attach(htmlpart)
+
+    try:
+        with open(file, 'rb') as file:
+            part = MIMEApplication(file.read())
+            part.add_header('Content-Disposition', 'attachment', filename=str('callback - {}.txt'.format(files.DateFormat.calls_date(date_report))))
+            msg.attach(part)
+
+    except FileNotFoundError as e:
+        logging.warning(e.args[0])
 
     username = config['mail_login']['username']
     password = config['mail_login']['password']

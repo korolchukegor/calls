@@ -53,8 +53,10 @@ def calltouch_leads_request(date_report):
         'dateTo': check_date
 
     }
-
-    req_calltouch = requests.get(url_calltouch, data)
+    try:
+        req_calltouch = requests.get(url_calltouch, data)
+    except Exception as e:
+        logging.warning('Calltouch leads request ERROR - {}'.format(e.args[0]))
 
     jdata = json.loads(req_calltouch.text)
     for i in jdata:
@@ -114,14 +116,16 @@ def calltouch_calls_request(date_report):
         'dateTo': check_date
 
     }
+    try:
+        req_calltouch = requests.get(url_calltouch_calls, data)
+    except Exception as e:
+        logging.warning('Calltouch call request ERROR - {}'.format(e.args[0]))
 
-    req_calltouch = requests.get(url_calltouch_calls, data)
     jdata = json.loads(req_calltouch.text)
 
     for i in jdata:
 
         try:
-
 
             type = 'call'
             email = None

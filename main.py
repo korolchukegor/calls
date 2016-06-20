@@ -72,7 +72,7 @@ if __name__ == '__main__':
         insurance_leads=html.calltouch_by_day(date_report, index.depts[6], type='lead'),
         insurance_calls=html.calltouch_by_day(date_report, index.depts[6], type='call'),)
 
-    send_email.send_mail(html.html_text, files.day_before, files.week, 'template')
+    send_email.send_mail(html.html_text, date_report, files.week, 'template')
     leads_callback.leads_callback(date_report)
     logging.info('DAILY SCRIPT ENDS')
 

@@ -49,17 +49,21 @@ def leads_callback(date_report):
                                                   minute=int(calls_list[0][3].split(':')[1]),
                                                   second=int(calls_list[0][3].split(':')[2]))
 
-                datetime_call_txt = 'Перезвонили - {}'.format(datetime_call)
-                if calls_list[-1][1] <= 40:
-                    status = 'Слишком короткий звонок {}с.'.format(calls_list[-1][1])
-                elif datetime_call > deadline:
-                    status = 'Не перезвонили вовремя, задержка - {}'.format(datetime_call - deadline)
-                elif calls_list[-1][1] >= 40:
+                if calls_list[-1][1] <= 40 and datetime_call <= deadline:
+                    status = 'Звонок - {}\nКороткий звонок - {} с.'.format(datetime_call, calls_list[-1][1])
+
+                elif calls_list[-1][1] > 40 and datetime_call > deadline:
+                    status = 'Звонок - {}\nЗвонок с опозданием, задержка - {}'.format(datetime_call,
+                                                                                         datetime_call - deadline)
+                elif calls_list[-1][1] <= 40 and datetime_call > deadline:
+                    status = 'Звонок - {}\nКороткий звонок - {} с. Звонок с опозданием, задержка - {}'.format(
+                        datetime_call, calls_list[-1][1], datetime_call - deadline)
+
+                elif calls_list[-1][1] >= 40 and datetime_call <= deadline:
                     status = 'Успешный звонок'
 
             else:
-                status = 'Заявка без обзвона'
-                datetime_call_txt = 'Не перезвонили'
+                status = 'Заявка без обзвона!!!'
 
                 # TODO Убрать в класс DateFormat
 
