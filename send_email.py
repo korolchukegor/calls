@@ -18,7 +18,6 @@ config.read('config.ini')
 def send_mail(html_text, date_report, week, template):
     """ Формирование письма для рассылки """
 
-    # TODO Сделать, чтобы во всех почтовых клиентах график был в шаблоне, а не во вложении
     fromaddr = 'Neva Calls <korolchukwork@gmail.com>'
     toaddr = config['send_mails']['mails'].split(',')
 
@@ -49,7 +48,7 @@ def send_mail(html_text, date_report, week, template):
             msg.attach(part)
 
     except FileNotFoundError as e:
-        logging.warning(e.args[0])
+        logging.warning('File Not Found - {}'.format(e.args))
 
     username = config['mail_login']['username']
     password = config['mail_login']['password']

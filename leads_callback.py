@@ -3,6 +3,7 @@
 import sqlite3
 import files
 import datetime
+import logging
 
 
 def leads_callback(date_report):
@@ -13,16 +14,20 @@ def leads_callback(date_report):
     c = conn.cursor()
     fileheader = 'Проверка {}\n'.format(date_report)
     date_calls = files.DateFormat.calls_date(date_report)
+    status = 'Not called'
+    dt_lead_txt = None
+    deadline_txt = None
+    status_txt = None
+
     with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
         txtfile.write(fileheader + '\n')
-    type = 'lead'
     c.execute(
-        "SELECT date, time, dept, telephone, fio, deadline FROM calltouch WHERE type = '{}' AND deadline LIKE '{}%'".format(
-            type, date_calls))
+        "SELECT id, date, time, dept, telephone, fio, deadline FROM calltouch WHERE status = ? AND "
+        "type = 'lead' AND deadline LIKE '{}%'".format(date_calls), (status,))
 
     for j in c.fetchall():
         counter += 1
-        date, time, dept, telephone, fio, deadline = j
+        id, date, time, dept, telephone, fio, deadline = j
         dl_time = deadline.split(' ')[1]
         dl_date = deadline.split(' ')[0]
         deadline = datetime.datetime(year=int(dl_date.split('-')[0]), month=int(dl_date.split('-')[1]),
@@ -50,27 +55,34 @@ def leads_callback(date_report):
                                                   second=int(calls_list[0][3].split(':')[2]))
 
                 if calls_list[-1][1] <= 40 and datetime_call <= deadline:
-                    status = 'Звонок - {}\nКороткий звонок - {} с.'.format(datetime_call, calls_list[-1][1])
+                    status = 'Short call'
+                    status_txt = 'Звонок - {}\nКороткий звонок - {} с.\n'.format(datetime_call, calls_list[-1][1])
 
                 elif calls_list[-1][1] > 40 and datetime_call > deadline:
-                    status = 'Звонок - {}\nЗвонок с опозданием, задержка - {}'.format(datetime_call,
-                                                                                         datetime_call - deadline)
+                    status = 'Late call'
+                    status_txt = 'Звонок - {}\nЗвонок с опозданием, задержка - {}\n'.format(datetime_call,
+                                                                                            datetime_call - deadline)
                 elif calls_list[-1][1] <= 40 and datetime_call > deadline:
-                    status = 'Звонок - {}\nКороткий звонок - {} с. Звонок с опозданием, задержка - {}'.format(
+                    status = 'Short and Late call'
+                    status_txt = 'Звонок - {}\nКороткий звонок - {} с. Звонок с опозданием, задержка - {}\n'.format(
                         datetime_call, calls_list[-1][1], datetime_call - deadline)
 
                 elif calls_list[-1][1] >= 40 and datetime_call <= deadline:
-                    status = 'Успешный звонок'
+                    status = 'Good call'
+                    status_txt = 'Успешный звонок\n'
 
             else:
-                status = 'Заявка без обзвона!!!'
-
-                # TODO Убрать в класс DateFormat
+                status_txt = 'Заявка без обзвона!!!\n'
 
         else:
-            status = 'Некорректный номер телефона'
+            status = 'Bad phone'
+            status_txt = 'Некорректный номер телефона\n'
+        try:
+            c.execute("UPDATE calltouch SET status = (?) WHERE id = (?)", (status, id))
+            conn.commit()
+        except Exception as e:
+            logging.warning(e.args[0])
 
-        status_txt = status + '\n'
         with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
             txtfile.write('{}\n{}\n{}\n{}\n'.format(leadheader, dt_lead_txt, deadline_txt, status_txt))
 

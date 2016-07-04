@@ -77,12 +77,12 @@ def calltouch_leads_request(date_report):
             dept = subject_dept(i['subject'])
             conn = sqlite3.connect('dbtel.db')
             c = conn.cursor()
+            oldphone = i['client']['phones'][0]['phoneNumber']
+
             try:
                 email = None
-                oldphone = i['client']['phones'][0]['phoneNumber']
                 if len(oldphone) == 7:
                     oldphone = '812' + oldphone
-
                 phone = tel_datatel(oldphone)
                 if phone is not None:
                     c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -90,7 +90,8 @@ def calltouch_leads_request(date_report):
                                fio,
                                dept, deadline, status))
             except TypeError:
-                phone = None
+                phone = oldphone
+                status = 'Bad phone'
                 email = i['client']['contacts'][0]['contactValue']
                 c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                           (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,

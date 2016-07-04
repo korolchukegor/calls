@@ -1,6 +1,5 @@
 # coding: utf-8
 
-import os
 import csv
 import sqlite3
 import datetime
@@ -10,6 +9,9 @@ import configparser
 import db
 import direct
 import calltouch
+import re
+import analytics
+
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -37,6 +39,7 @@ depts = [
 def check_phone(file, int_dept_nums, dept, week, time):
     """ Фильтрация csv-файла со звонками """
     # TODO Переписать для одной общей таблицы
+
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS calls(id TEXT UNIQUE,
@@ -53,20 +56,21 @@ def check_phone(file, int_dept_nums, dept, week, time):
                 i[3] = u'2447788'
             elif i[2] == u'НеваСервис':
                 i[2] = u'2447778'
+            idnum = re.sub(r'[- :]', '', i[0]) + i[2] + i[3]
 
             try:
                 if i[1] == u'RX' and int(i[3]) in int_dept_nums and int(i[4]) >= time:
-                    c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (i[7], i[0].split(' ')[0],
+                    c.execute("INSERT OR IGNORE INTO calls VALUES (?, ?, ?, ?, ?)", (idnum, i[0].split(' ')[0],
                                                                                      week, dept, i[2]))
 
-            except ValueError:
-                logging.warning(u'wrong number - {}'.format(i[3]))
+            except ValueError as e:
+                logging.warning(u'wrong number - {}, {}'.format(i[3], e.args[0]))
 
             if len(i[3]) == 7:
                 i[3] = '8812' + i[3]
             try:
                 if i[1] == u'TX':
-                    c.execute("INSERT OR IGNORE INTO calls_out VALUES (?, ?, ?, ?, ?)", (i[7], i[0].split(' ')[0],
+                    c.execute("INSERT OR IGNORE INTO calls_out VALUES (?, ?, ?, ?, ?)", (idnum, i[0].split(' ')[0],
                                                                                          i[0].split(' ')[1], i[3],
                                                                                          i[4]))
             except ValueError:
@@ -100,7 +104,6 @@ def copy_and_add(date_start, date_end, table):
             check_phone(files.directory + file, int_ins_nums, depts[6], week, 45)
 
     elif table == 'direct':
-
         while True:
             date_start = date_start + datetime.timedelta(days=1)
             if date_start == date_end:
@@ -119,6 +122,26 @@ def copy_and_add(date_start, date_end, table):
             direct.check_direct(direct.nfz, date, compaign_type='rsya')
             direct.check_direct(direct.insurance, date, compaign_type='rsya')
 
+    elif table == 'adwords':
+        while True:
+            date_start = date_start + datetime.timedelta(days=1)
+            if date_start == date_end:
+                break
+            lst.append(date_start)
+
+        for date in lst:
+            analytics.analytics_report(date)
+
+    elif table == 'traffic':
+        while True:
+            date_start = date_start + datetime.timedelta(days=1)
+            if date_start == date_end:
+                break
+            lst.append(date_start)
+
+        for date in lst:
+            analytics.analytics_report(date)
+
     elif table == 'calltouch':
         while True:
             date_start = date_start + datetime.timedelta(days=1)
@@ -131,8 +154,6 @@ def copy_and_add(date_start, date_end, table):
             calltouch.calltouch_calls_request(date)
 
 
-
-
 def base_days_lost(table):
     """ Первый запуск и проверка, не пропущены ли дни """
 
@@ -143,7 +164,7 @@ def base_days_lost(table):
     if result[0] <= 1:
 
         logging.warning('{} table is empty'.format(table))
-        date_last_year = datetime.datetime.today() - datetime.timedelta(days=365)
+        date_last_year = datetime.datetime.today() - datetime.timedelta(days=100)
         date_of_file = datetime.datetime.today()
         copy_and_add(date_last_year, date_of_file, table)
 
@@ -160,5 +181,3 @@ def base_days_lost(table):
                 copy_and_add(date_index, next_date_index, table)
 
         logging.debug('all dates are in the {}'.format(table))
-
-

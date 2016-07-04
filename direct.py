@@ -5,7 +5,6 @@ import configparser
 import requests
 import logging
 import sqlite3
-import re
 import files
 
 
@@ -44,8 +43,12 @@ def check_direct(dept, date_report, compaign_type):
         }
     }
 
-    response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'))
-    js = json.loads(response.text)
+    try:
+        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'))
+        js = json.loads(response.text)
+    except Exception as e:
+        logging.warning(e.args[0])
+
     try:
         for i in js['data']:
             if compaign_type == 'search':
@@ -59,17 +62,16 @@ def check_direct(dept, date_report, compaign_type):
 
         logging.debug('Direct request {} OK'.format(date))
 
-    except KeyError:
-        logging.warning('Direct request problem')
+    except KeyError as e:
+        logging.warning('Direct request problem {}'.format(e.args[0]))
 
 
     try:
         conn = sqlite3.connect('dbtel.db')
         c = conn.cursor()
-        id = re.sub(r'[- :]', '', date) + list(dept.keys())[0] + compaign_type
 
-        c.execute("INSERT OR IGNORE INTO direct VALUES (?, ?, ?, ?, ?, ?, ?)",
-                  (id, date, compaign['type'], list(dept.keys())[0],
+        c.execute("INSERT OR IGNORE INTO direct VALUES (?, ?, ?, ?, ?, ?)",
+                  (date, compaign['type'], list(dept.keys())[0],
                    sum(compaign['shows']),
                    sum(compaign['clicks']),
                    round(sum(compaign['sum']) * 30)))

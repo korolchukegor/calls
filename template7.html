@@ -4,62 +4,70 @@
     <title>Статистика по звонкам</title>
 </head>
 <body>
-    <p>График звонков по неделям - <a href="{link}">Просмотреть</a></p>
-		<table border="1">
+    <p style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size: 13px;">График звонков по неделям - <a href="{link}">Просмотреть</a></p>
+		<table style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size: 13px;border: 1px solid #a7a7a7;">
         <tr>
-            <td><b>Отдел</b></td>
-            <td>Всего звонков(уникальные)</td>
-            <td>Заявки с сайта(уникальные)</td>
-            <td>Звонки с сайта(уникальные)</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Отдел</b></th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Всего входящих звонков (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Звонки с сайта (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Заявки с сайта (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Заявки без обзвона</th>
 
         </tr>
 	    <tr>
-            <td><b>Cервис</b></td>
-            <td>{serv_calls_all}</td>
-            <td>{serv_leads}</td>
-            <td>{serv_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Cервис</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{serv_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{serv_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{serv_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{serv_no_callback}</td>
         </tr>
 
  	    <tr>
-            <td><b>Продажи</b></td>
-            <td>{sales_calls_all}</td>
-            <td>{sales_leads}</td>
-            <td>{sales_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Продажи</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{sales_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{sales_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{sales_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{sales_no_callback}</td>
         </tr>
 
         <tr>
-            <td><b>Trade-in</b></td>
-            <td>{tradein_calls_all}</td>
-            <td>{tradein_leads}</td>
-            <td>{tradein_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Trade-in</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{tradein_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{tradein_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{tradein_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{tradein_no_callback}</td>
         </tr>
 
         <tr>
-            <td><b>NFZ</b></td>
-            <td>{nfz_calls_all}</td>
-            <td>{nfz_leads}</td>
-            <td>{nfz_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>NFZ</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{nfz_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{nfz_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{nfz_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{nfz_no_callback}</td>
         </tr>
 
         <tr>
-            <td><b>Доп.оборудование</b></td>
-            <td>{dop_calls_all}</td>
-            <td>{dop_leads}</td>
-            <td>{dop_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Доп.оборудование</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{dop_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{dop_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{dop_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{dop_no_callback}</td>
         </tr>
 
         <tr>
-            <td><b>Запчасти</b></td>
-            <td>{zch_calls_all}</td>
-            <td>{zch_leads}</td>
-            <td>{zch_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Запчасти</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{zch_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{zch_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{zch_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{zch_no_callback}</td>
         </tr>
 
         <tr>
-            <td><b>Страхование</b></td>
-            <td>{insurance_calls_all}</td>
-            <td>{insurance_leads}</td>
-            <td>{insurance_calls}</td>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Страхование</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{insurance_calls_all}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{insurance_calls}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{insurance_leads}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{insurance_no_callback}</td>
         </tr>
 
     	</table>

@@ -6,7 +6,6 @@ import os
 import logging
 import configparser
 
-# TODO Сделать файл красиво
 config = configparser.ConfigParser()
 config.read('config.ini')
 
@@ -17,9 +16,6 @@ weekday = datetime.date.today().weekday()  # определяем день не�
 file_name = '{:%y_%m_%d}'.format(day_before)  # приобразовываем дату в название файла
 server_dir = config['calls_server']['directory']
 work_file = r'{}\{}.csv'.format(directory, file_name)
-weeks_start = []
-weeks_end = []
-weeks_to_graph = []
 
 
 class DateFormat:
@@ -27,28 +23,29 @@ class DateFormat:
 
     @staticmethod
     def calltouch_leads(date):
-        """ Получаем дату в формате Calltouch для заявок - ГГГГ/ММ/ДД """
+        """ Получаем дату в формате Calltouch для заявок - ГГГГ/ММ/ДД - str"""
 
         new_date = '{:%Y/%m/%d}'.format(date)
         return new_date
 
     @staticmethod
     def calltouch_calls(date):
-        """ Получаем дату в формате Calltouch для звонков - ДД/ММ/ГГГГ """
+        """ Получаем дату в формате Calltouch для звонков - ДД/ММ/ГГГГ - str"""
 
         new_date = '{:%d/%m/%Y}'.format(date)
         return new_date
 
     @staticmethod
     def calls_date(date):
-        """ Получаем дату в формате ГГГГ-ММ-ДД """
+        """ Получаем дату в формате ГГГГ-ММ-ДД - str"""
 
         new_date = '{:%Y-%m-%d}'.format(date)
+
         return new_date
 
     @staticmethod
     def filetodate(filename):
-        """ Получаем дату по названию файла ГГ_ММ_ДД.csv """
+        """ Получаем дату по названию файла ГГ_ММ_ДД.csv - date"""
 
         year = int('20' + filename[0:2])
         month = int(filename[3:5])
@@ -58,11 +55,21 @@ class DateFormat:
 
     @staticmethod
     def filetoweek(filename):
-        """ Получаем номер недели по названию файла ГГ_ММ_ДД.csv """
+        """ Получаем номер недели по названию файла ГГ_ММ_ДД.csv  """
 
         year = int('20' + filename[0:2])
         month = int(filename[3:5])
         day = int(filename[6:8])
+
+        return datetime.date(year, month, day).isocalendar()[1]
+
+    @staticmethod
+    def strdate_to_week(str_date):
+        """ Получаем номер недели по дате з строки """
+
+        year = int(str_date.split('-')[0])
+        month = int(str_date.split('-')[1])
+        day = int(str_date.split('-')[2])
 
         return datetime.date(year, month, day).isocalendar()[1]
 
@@ -107,7 +114,7 @@ class DateFormat:
                                          day=int(date.split('/')[0]), hour=10, minute=0, second=0) + datetime.timedelta(
                 days=1)
         else:
-            deadline = dt_lead + datetime.timedelta(hours=1)
+            deadline = dt_lead + datetime.timedelta(hours=int(config['deadline']['hours']))
         return deadline
 
 
@@ -130,11 +137,26 @@ def time_gen(start, end, delta):
 week = DateFormat.filetoweek(file_name)
 year_now = '{:%Y}'.format(datetime.datetime.today())
 
-for res in time_gen((datetime.date.today() - datetime.timedelta(weeks=50)), datetime.date.today(),
-                    datetime.timedelta(weeks=1)):
-    weeks_start.append('{:%Y-%m-%d}'.format(res))
-    weeks_to_graph.append(str(res.isocalendar()[1]))
 
-for res in time_gen((day_before - datetime.timedelta(weeks=49)), datetime.date.today(),
-                    datetime.timedelta(weeks=1)):
-    weeks_end.append('{:%Y-%m-%d}'.format(res))
+def weeks_start_dates(weeks):
+    """ Создаем списки начальных дат по указанным неделям для последующего запроса из базы """
+
+    weeks_start = [DateFormat.calls_date(res) for res in
+                   time_gen((datetime.date.today() - datetime.timedelta(weeks=weeks)),
+                            datetime.date.today(), datetime.timedelta(weeks=1))]
+    return weeks_start
+
+
+def weeks_end_dates(weeks):
+    """ Создаем списки конечных дат по указанным неделям для последующего запроса из базы """
+
+    weeks_end = [DateFormat.calls_date(res) for res in time_gen((day_before - datetime.timedelta(weeks=int(weeks - 1))),
+                                                                datetime.date.today(), datetime.timedelta(weeks=1))]
+    return weeks_end
+
+
+def weeks_to_graph(weeks_start):
+
+    weeks_list = [DateFormat.strdate_to_week(date) for date in weeks_start]
+    return weeks_list
+
