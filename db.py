@@ -34,7 +34,7 @@ class Database_manager:
         return self.c.fetchone()
 
     def result_all(self):
-        result_all = [i[0] for i in self.c.fetchall()] # TODO ИСПРАВИТЬ i for i in self.c.fetchall() Не работает, когда надо вывести больше одного значения
+        result_all = self.c.fetchall()
         return result_all
 
     def __del__(self):

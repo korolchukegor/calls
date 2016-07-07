@@ -24,7 +24,7 @@ def leads_callback(date_report):
     c.execute(
         "SELECT id, date, time, dept, telephone, fio, deadline FROM calltouch WHERE status = ? AND "
         "type = 'lead' AND deadline LIKE '{}%'".format(date_calls), (status,))
-
+    print(c.fetchall())
     for j in c.fetchall():
         counter += 1
         id, date, time, dept, telephone, fio, deadline = j
@@ -80,8 +80,10 @@ def leads_callback(date_report):
         try:
             c.execute("UPDATE calltouch SET status = (?) WHERE id = (?)", (status, id))
             conn.commit()
+            print('ok')
         except Exception as e:
             logging.warning(e.args[0])
+            print(e)
 
         with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
             txtfile.write('{}\n{}\n{}\n{}\n'.format(leadheader, dt_lead_txt, deadline_txt, status_txt))

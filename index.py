@@ -170,7 +170,8 @@ def base_days_lost(table):
 
     else:
         data_base.query("SELECT DISTINCT date FROM {} ORDER BY date ASC".format(table))
-        call_list = data_base.result_all()
+
+        call_list = [i[0] for i in data_base.result_all()]
 
         for index in range(len(call_list) - 1):
             date_index = files.DateFormat.db_date_normal(call_list[index])
