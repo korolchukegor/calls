@@ -77,9 +77,9 @@ def calltouch_leads_request(date_report):
             dept = subject_dept(i['subject'])
             conn = sqlite3.connect('dbtel.db')
             c = conn.cursor()
-            oldphone = i['client']['phones'][0]['phoneNumber']
 
             try:
+                oldphone = i['client']['phones'][0]['phoneNumber']
                 email = None
                 if len(oldphone) == 7:
                     oldphone = '812' + oldphone

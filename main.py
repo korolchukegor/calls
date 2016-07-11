@@ -11,6 +11,7 @@ import calltouch
 import leads_callback
 import configparser
 import analytics
+import datetime
 
 # TODO Сделать debug_mode
 
@@ -27,7 +28,8 @@ if __name__ == '__main__':
     zchdict = {u'zch': []}
     insdict = {u'insurance': []}
 
-    date_report = files.day_before
+    # date_report = files.day_before
+    date_report = datetime.date.today() - datetime.timedelta(days=1)
 
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
                         level=logging.DEBUG, filename=u'log.log')
@@ -60,7 +62,7 @@ if __name__ == '__main__':
     analytics.analytics_report(date_report)
 
     index.base_days_lost(table='calls')
-    index.base_days_lost(table='calltouch')
+    index.base_days_lost(table='calltouch') # Если в базе есть заявки или звонки, то проверка не сработает
     index.base_days_lost(table='direct')
     index.base_days_lost(table='adwords')
     index.base_days_lost(table='traffic')

@@ -96,11 +96,11 @@ def read_base_ads_ctr(date_start, date_end, dept_dict, dept, table):
 
 def read_base_ads_cr_contacts(date_start, date_end, dept_dict, dept):
     """ Чтение данных по количеству контактов и кликов из таблиц Calltouch, Direct и Adwords за указанный период """
-
+    source_type = 'cpc'
     data_base = db.Database_manager()
     for day_start, day_end in zip(date_start, date_end):
-        data_base.query("SELECT count(DISTINCT telephone) FROM calltouch WHERE dept = ? AND date BETWEEN (?) AND (?)",
-            (dept, day_start, day_end))
+        data_base.query("SELECT count(DISTINCT telephone) FROM calltouch WHERE dept = ? AND source_type = ? AND date BETWEEN (?) AND (?)",
+            (dept, source_type, day_start, day_end))
         result_calltouch = data_base.result()[0]
         data_base.query("SELECT sum(clicks) FROM adwords WHERE department = ? AND date BETWEEN (?) AND (?)",
             (dept, day_start, day_end))
@@ -172,7 +172,24 @@ def send_data_plot_lines(filename, data_type):
             make_trace_line(nfz_dict['direct'][data_type], name='NFZ Direct'),
             make_trace_line(nfz_dict['adwords'][data_type], name='NFZ Adwords'),
             make_trace_line(insurance_dict['direct'][data_type], name='Страхование Direct'),
-            make_trace_line(insurance_dict['adwords'][data_type], name='Страхование Adwords'),]
+            make_trace_line(insurance_dict['adwords'][data_type], name='Страхование Adwords')]
+
+    layout = go.Layout(title=filename, xaxis=dict(
+        title=u'Недели',
+        autorange=True,
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        autotick=True,
+        ticks='',
+        type='category',
+        showticklabels=True))
+
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.plot(fig, filename=filename, sharing='public')
+    logging.info('Plot OK - {}'.format(plot_url))
+    return plot_url
+
 
 def send_data_plot_lines_cr(filename):
     """ Сборка и отправка данных графика """
@@ -181,7 +198,7 @@ def send_data_plot_lines_cr(filename):
             make_trace_line(sales_dict['cr_contacts'], name='Продажи'),
             make_trace_line(tradein_dict['cr_contacts'], name='Trade-in'),
             make_trace_line(nfz_dict['cr_contacts'], name='NFZ'),
-            make_trace_line(insurance_dict['cr_contacts'], name='Страхование'),]
+            make_trace_line(insurance_dict['cr_contacts'], name='Страхование')]
 
 
     layout = go.Layout(title=filename, xaxis=dict(
@@ -206,13 +223,18 @@ def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot
 
     dashboard_json = {
         "rows": [
-            [{"plot_url": plot_url1},
-             {"plot_url": plot_url2},
-             {"plot_url": plot_url3},
-             {"plot_url": plot_url4},
-             {"plot_url": plot_url5},
-             {"plot_url": plot_url6}
-             ]
+            [
+                {"plot_url": plot_url1},
+                {"plot_url": plot_url2},
+                {"plot_url": plot_url3}
+            ],
+
+            [
+                {"plot_url": plot_url4},
+                {"plot_url": plot_url5},
+                {"plot_url": plot_url6}
+            ]
+
 
         ],
         "banner": {
