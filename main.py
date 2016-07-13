@@ -179,11 +179,16 @@ if __name__ == '__main__':
 
         plot_url6 = plot.send_data_plot_lines_cr(filename='CR cpc - > Contacts(calls+leads), %')
 
-        plot.rb_leads_by_source(files.weeks_start_dates(10), files.weeks_end_dates(10))
+        plot.rb_leads_by_source(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num))
 
         plot_url7 = plot.sdplot_leads_by_source(filename='Звонки + заявки по источникам')
 
-        dashboard = plot.create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7)
+        plot.read_base_cpl(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), table='direct')
+        plot.read_base_cpl(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), table='adwords')
+
+        plot_url8 = plot.sd_plot_lines_cpl(filename='CPL, p.', data_type='cpl')
+
+        dashboard = plot.create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7, plot_url8)
 
         html.make_html(
 

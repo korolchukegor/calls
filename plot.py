@@ -28,8 +28,8 @@ traf = {
         'Поиск Яндекс': {'source': 'yandex', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
         'Поиск Google': {'source': 'google', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
         'Поиск Mail': {'source': 'go.mail.ru', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
-        'Реклама Яндекс': {'source': 'yandex', 'source_type': ['cpc', 'cpc (yclid)'], 'quantity': [], 'by_weeks': []},
-        'Реклама Google': {'source': 'google', 'source_type': ['cpc', 'cpc (gclid)'], 'quantity': [], 'by_weeks': []},
+        'Реклама Яндекс': {'source': 'yandex', 'source_type': ['cpc', 'cpc (yclid)'], 'quantity': [], 'by_weeks': [], 'cpl': [], 'money': []},
+        'Реклама Google': {'source': 'google', 'source_type': ['cpc', 'cpc (gclid)'], 'quantity': [], 'by_weeks': [], 'cpl': [], 'money': []},
         'Реклама VK': {'source': 'vk', 'source_type': 'cpc', 'quantity': [], 'by_weeks': []},
         'Прямые заходы': {'source': '(direct)', 'source_type': '(none)', 'quantity': [], 'by_weeks': []},
         'Email': {'source': 'email', 'source_type': None, 'quantity': [], 'by_weeks': []},
@@ -39,7 +39,7 @@ traf = {
 
     }
 
-weeks_list = files.weeks_to_graph(files.weeks_start_dates(10))
+weeks_list = files.weeks_to_graph(files.weeks_start_dates(int(config['plotly']['weeks_num'])))
 dashboard_link = None
 
 
@@ -107,6 +107,31 @@ def read_base_ads_ctr(date_start, date_end, dept_dict, dept, table):
             dept_dict[table]['ctr'].append(0)
         except TypeError:
             dept_dict[table]['ctr'].append(0)
+
+
+def read_base_cpl(date_start, date_end, table):
+
+    data_base = db.Database_manager()
+    for day_start, day_end in zip(date_start, date_end):
+        data_base.query(
+            "SELECT sum(money) FROM {} WHERE date BETWEEN (?) AND (?)".format(table),
+            (day_start, day_end))
+        result = data_base.result()[0]
+
+        if table == 'direct':
+            key = 'Реклама Яндекс'
+        elif table == 'adwords':
+            key = 'Реклама Google'
+
+        traf[key]['money'].append(result)
+        money = traf[key]['money']
+        leads = traf[key]['by_weeks']
+    try:
+        traf[key]['cpl'] = list(map(lambda a, b: round(a / b),  money, leads))
+    except TypeError as te:
+        logging.warning('money in {} for that weeks are None'.format(table), te)
+    except ZeroDivisionError as zde:
+        logging.warning('leads in {} for that weeks are 0'.format(key), zde)
 
 
 def read_base_ads_cr_contacts(date_start, date_end, dept_dict, dept):
@@ -269,6 +294,30 @@ def send_data_plot_lines_cr(filename):
     return plot_url
 
 
+def sd_plot_lines_cpl(filename, data_type):
+    """ Сборка и отправка данных графика """
+
+    data = [make_trace_line(traf['Реклама Яндекс'][data_type], name='Реклама Яндекс'),
+            make_trace_line(traf['Реклама Google'][data_type], name='Реклама Google'),
+            ]
+
+    layout = go.Layout(title=filename, xaxis=dict(
+        title=u'Недели',
+        autorange=True,
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        autotick=True,
+        ticks='',
+        type='category',
+        showticklabels=True))
+
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.plot(fig, filename=filename, sharing='public')
+    logging.info('Plot OK - {}'.format(plot_url))
+    return plot_url
+
+
 def sdplot_leads_by_source(filename):
     """ Сборка и отправка данных графика лидов по источникам"""
 
@@ -302,7 +351,7 @@ def sdplot_leads_by_source(filename):
     return plot_url
 
 
-def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7):
+def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7, plot_url8):
     """ Отправляет данные в Dashboard """
 
     dashboard_json = {
@@ -321,9 +370,8 @@ def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot
 
             [
                 {"plot_url": plot_url7},
-
+                {"plot_url": plot_url8}
             ]
-
 
         ],
         "banner": {
