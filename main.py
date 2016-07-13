@@ -11,7 +11,6 @@ import calltouch
 import leads_callback
 import configparser
 import analytics
-import datetime
 
 # TODO Сделать debug_mode
 
@@ -28,8 +27,7 @@ if __name__ == '__main__':
     zchdict = {u'zch': []}
     insdict = {u'insurance': []}
 
-    # date_report = files.day_before
-    date_report = datetime.date.today() - datetime.timedelta(days=1)
+    date_report = files.day_before
 
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
                         level=logging.DEBUG, filename=u'log.log')
@@ -108,20 +106,13 @@ if __name__ == '__main__':
         weeks_num = int(config['plotly']['weeks_num'])
         logging.info(
             'report from {} -- {}'.format(files.weeks_start_dates(weeks_num)[0], files.weeks_end_dates(weeks_num)[-1]))
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict,
-                         index.depts[0])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict,
-                         index.depts[1])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict,
-                         index.depts[2])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict,
-                         index.depts[3])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict,
-                         index.depts[4])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict,
-                         index.depts[5])
-        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict,
-                         index.depts[6])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict, index.depts[4])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict, index.depts[5])
+        plot.read_base50(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[6])
 
         plot_url1 = plot.send_data_plot(filename=u'Звонки')
 
@@ -129,20 +120,13 @@ if __name__ == '__main__':
                        plot.nfz_dict[u'calls'], plot.dop_dict[u'calls'], plot.zch_dict[u'calls'],
                        plot.insurance_dict[u'calls'])
 
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.service_dict, index.depts[0], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict,
-                                 index.depts[1], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.tradein_dict, index.depts[2], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict,
-                                 index.depts[3], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict,
-                                 index.depts[4], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict,
-                                 index.depts[5], type='lead')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.insurance_dict, index.depts[6], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict, index.depts[4], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict, index.depts[5], type='lead')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], type='lead')
 
         plot_url2 = plot.send_data_plot(filename=u'Заявки с сайта')
 
@@ -150,86 +134,56 @@ if __name__ == '__main__':
                        plot.nfz_dict[u'calls'], plot.dop_dict[u'calls'], plot.zch_dict[u'calls'],
                        plot.insurance_dict[u'calls'])
 
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.service_dict, index.depts[0], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict,
-                                 index.depts[1], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.tradein_dict, index.depts[2], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict,
-                                 index.depts[3], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict,
-                                 index.depts[4], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict,
-                                 index.depts[5], type='call')
-        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num),
-                                 plot.insurance_dict, index.depts[6], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict, index.depts[4], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict, index.depts[5], type='call')
+        plot.read_base_calltouch(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], type='call')
 
         plot_url3 = plot.send_data_plot(filename=u'Звонки с сайта')
 
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.service_dict,
-                               index.depts[0], table='direct')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.sales_dict, index.depts[1],
-                               table='direct')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.tradein_dict,
-                               index.depts[2], table='direct')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.nfz_dict, index.depts[3],
-                               table='direct')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.insurance_dict,
-                               index.depts[6], table='direct')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.service_dict,
-                               index.depts[0], table='adwords')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.sales_dict, index.depts[1],
-                               table='adwords')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.tradein_dict,
-                               index.depts[2], table='adwords')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.nfz_dict, index.depts[3],
-                               table='adwords')
-        plot.read_base_ads_cpc(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.insurance_dict,
-                               index.depts[6], table='adwords')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], table='direct')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], table='direct')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], table='direct')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], table='direct')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], table='direct')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], table='adwords')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], table='adwords')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], table='adwords')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], table='adwords')
+        plot.read_base_ads_cpc(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], table='adwords')
 
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.service_dict,
-                               index.depts[0], table='direct')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.sales_dict, index.depts[1],
-                               table='direct')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.tradein_dict,
-                               index.depts[2], table='direct')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.nfz_dict, index.depts[3],
-                               table='direct')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.insurance_dict,
-                               index.depts[6], table='direct')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.service_dict,
-                               index.depts[0], table='adwords')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.sales_dict, index.depts[1],
-                               table='adwords')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.tradein_dict,
-                               index.depts[2], table='adwords')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.nfz_dict, index.depts[3],
-                               table='adwords')
-        plot.read_base_ads_ctr(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.insurance_dict,
-                               index.depts[6], table='adwords')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], table='direct')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], table='direct')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], table='direct')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], table='direct')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], table='direct')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0], table='adwords')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1], table='adwords')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2], table='adwords')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3], table='adwords')
+        plot.read_base_ads_ctr(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6], table='adwords')
 
         plot_url4 = plot.send_data_plot_lines(filename=u'CTR, %', data_type='ctr')
         plot_url5 = plot.send_data_plot_lines(filename=u'CPC, р.', data_type='cpc')
 
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.service_dict,
-                                       index.depts[0])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.sales_dict,
-                                       index.depts[1])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.tradein_dict,
-                                       index.depts[2])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.nfz_dict,
-                                       index.depts[3])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.dop_dict,
-                                       index.depts[4])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.zch_dict,
-                                       index.depts[5])
-        plot.read_base_ads_cr_contacts(files.weeks_start_dates(10), files.weeks_end_dates(10), plot.insurance_dict,
-                                       index.depts[6])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.service_dict, index.depts[0])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.sales_dict, index.depts[1])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.tradein_dict, index.depts[2])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.nfz_dict, index.depts[3])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.dop_dict, index.depts[4])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.zch_dict, index.depts[5])
+        plot.read_base_ads_cr_contacts(files.weeks_start_dates(weeks_num), files.weeks_end_dates(weeks_num), plot.insurance_dict, index.depts[6])
 
-        plot_url6 = plot.send_data_plot_lines_cr(filename='CR Contacts(calls+leads)')
+        plot_url6 = plot.send_data_plot_lines_cr(filename='CR cpc - > Contacts(calls+leads), %')
 
-        dashboard = plot.create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6)
+        plot.rb_leads_by_source(files.weeks_start_dates(10), files.weeks_end_dates(10))
+
+        plot_url7 = plot.sdplot_leads_by_source(filename='Звонки + заявки по источникам')
+
+        dashboard = plot.create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7)
 
         html.make_html(
 

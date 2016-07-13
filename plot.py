@@ -23,6 +23,21 @@ dop_dict = {u'calls': [], 'adwords': {u'ctr': [], u'cpc': []}, 'direct': {u'ctr'
 zch_dict = {u'calls': [], 'adwords': {u'ctr': [], u'cpc': []}, 'direct': {u'ctr': [], u'cpc': []}, 'cr_contacts': []}
 insurance_dict = {u'calls': [], 'adwords': {u'ctr': [], u'cpc': []}, 'direct': {u'ctr': [], u'cpc': []}, 'cr_contacts': []}
 
+traf = {
+
+        'Поиск Яндекс': {'source': 'yandex', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
+        'Поиск Google': {'source': 'google', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
+        'Поиск Mail': {'source': 'go.mail.ru', 'source_type': 'organic', 'quantity': [], 'by_weeks': []},
+        'Реклама Яндекс': {'source': 'yandex', 'source_type': ['cpc', 'cpc (yclid)'], 'quantity': [], 'by_weeks': []},
+        'Реклама Google': {'source': 'google', 'source_type': ['cpc', 'cpc (gclid)'], 'quantity': [], 'by_weeks': []},
+        'Реклама VK': {'source': 'vk', 'source_type': 'cpc', 'quantity': [], 'by_weeks': []},
+        'Прямые заходы': {'source': '(direct)', 'source_type': '(none)', 'quantity': [], 'by_weeks': []},
+        'Email': {'source': 'email', 'source_type': None, 'quantity': [], 'by_weeks': []},
+        'Переходы по ссылкам': {'source': None, 'source_type': 'referral', 'quantity': [], 'by_weeks': []},
+        'Остальное': {'source': 'Остальные', 'source_type': None, 'quantity': [], 'by_weeks': []},
+        'Auto.ru': {'source': 'AUTORU', 'source_type': None, 'quantity': [], 'by_weeks': []}
+
+    }
 
 weeks_list = files.weeks_to_graph(files.weeks_start_dates(10))
 dashboard_link = None
@@ -96,6 +111,7 @@ def read_base_ads_ctr(date_start, date_end, dept_dict, dept, table):
 
 def read_base_ads_cr_contacts(date_start, date_end, dept_dict, dept):
     """ Чтение данных по количеству контактов и кликов из таблиц Calltouch, Direct и Adwords за указанный период """
+
     source_type = 'cpc'
     data_base = db.Database_manager()
     for day_start, day_end in zip(date_start, date_end):
@@ -117,6 +133,41 @@ def read_base_ads_cr_contacts(date_start, date_end, dept_dict, dept):
             dept_dict['cr_contacts'].append(round((result_calltouch / (result_adwords + result_direct)) * 100, 2))
         except ArithmeticError:
             dept_dict['cr_contacts'].append(0)
+
+
+def rb_leads_by_source(date_start, date_end):
+    """ Чтение данных о заявках и звонках с сайта по источникам """
+
+    data_base = db.Database_manager()
+    for day_start, day_end in zip(date_start, date_end):
+        data_base.query("SELECT count(DISTINCT telephone), source, source_type FROM calltouch WHERE date BETWEEN (?) AND (?) GROUP BY source, source_type",
+                  (day_start, day_end))
+        result = data_base.result_all()
+
+        for i in result:
+
+            if i[1] == 'AUTORU' and i[2] is None:
+                traf['Auto.ru']['quantity'].append(i[0])
+
+            elif i[1] == 'Остальные' and i[2] == '':
+                traf['Остальное']['quantity'].append(i[0])
+
+            elif i[2] == 'referral':
+                traf['Переходы по ссылкам']['quantity'].append(i[0])
+
+            elif i[1] == 'email':
+                traf['Email']['quantity'].append(i[0])
+
+        for name, values in traf.items():
+            for i in result:
+                try:
+                    if i[1] == values['source'] and i[2] in values['source_type']:
+                        values['quantity'].append(i[0])
+
+                except TypeError:
+                    pass
+            traf[name]['by_weeks'].append(sum(values['quantity']))
+            traf[name]['quantity'].clear()
 
 
 def make_trace_bar(y, name):
@@ -218,7 +269,40 @@ def send_data_plot_lines_cr(filename):
     return plot_url
 
 
-def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6):
+def sdplot_leads_by_source(filename):
+    """ Сборка и отправка данных графика лидов по источникам"""
+
+    data = [make_trace_bar(traf['Поиск Яндекс']['by_weeks'], name='Поиск Яндекс'),
+            make_trace_bar(traf['Поиск Google']['by_weeks'], name='Поиск Google'),
+            make_trace_bar(traf['Поиск Mail']['by_weeks'], name='Поиск Mail'),
+            make_trace_bar(traf['Реклама Яндекс']['by_weeks'], name='Реклама Яндекс'),
+            make_trace_bar(traf['Реклама Google']['by_weeks'], name='Реклама Google'),
+            make_trace_bar(traf['Реклама VK']['by_weeks'], name='Реклама VK'),
+            make_trace_bar(traf['Прямые заходы']['by_weeks'], name='Прямые заходы'),
+            make_trace_bar(traf['Email']['by_weeks'], name='Email'),
+            make_trace_bar(traf['Переходы по ссылкам']['by_weeks'], name='Переходы по ссылкам'),
+            make_trace_bar(traf['Остальное']['by_weeks'], name='Остальное'),
+            make_trace_bar(traf['Auto.ru']['by_weeks'], name='Auto.ru')
+            ]
+
+    layout = go.Layout(barmode='stack', title=filename, xaxis=dict(
+        title=u'Недели',
+        autorange=True,
+        showgrid=False,
+        zeroline=False,
+        showline=False,
+        autotick=True,
+        ticks='',
+        type='category',
+        showticklabels=True))
+
+    fig = go.Figure(data=data, layout=layout)
+    plot_url = py.plot(fig, filename=filename, sharing='public')
+    logging.info('Plot OK - {}'.format(plot_url))
+    return plot_url
+
+
+def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot_url6, plot_url7):
     """ Отправляет данные в Dashboard """
 
     dashboard_json = {
@@ -233,6 +317,11 @@ def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot
                 {"plot_url": plot_url4},
                 {"plot_url": plot_url5},
                 {"plot_url": plot_url6}
+            ],
+
+            [
+                {"plot_url": plot_url7},
+
             ]
 
 

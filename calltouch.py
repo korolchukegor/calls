@@ -6,6 +6,7 @@ import requests
 import sqlite3
 import logging
 import files
+import re
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -30,7 +31,7 @@ def call_dept(phone, date):
     conn = sqlite3.connect('dbtel.db')
     c = conn.cursor()
     try:
-        c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date))
+        c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date)) # TODO Добавить проверку по времени звонка
         dept = c.fetchone()[0]
         logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
     except TypeError as e:
@@ -42,7 +43,6 @@ def call_dept(phone, date):
 
 def calltouch_leads_request(date_report):
     """ Запрос данных по заявкам в Calltouch """
-    # TODO Все запросы json через try except
 
     check_date = files.DateFormat.calltouch_leads(date_report)
 
@@ -71,7 +71,7 @@ def calltouch_leads_request(date_report):
             subject = i['subject']
             source = i['order']['session']['source']
             medium = i['order']['session']['medium']
-            utm_content = bannerid_compaignid(i['order']['session']['utmContent'])
+            utm_content = bannerid_compaignid(i['order']['session']['utmContent']) # TODO Заменить на тип РК
             keyword = i['order']['session']['keywords']
             fio = i['client']['fio']
             dept = subject_dept(i['subject'])
@@ -80,22 +80,23 @@ def calltouch_leads_request(date_report):
 
             try:
                 oldphone = i['client']['phones'][0]['phoneNumber']
-                email = None
                 if len(oldphone) == 7:
                     oldphone = '812' + oldphone
                 phone = tel_datatel(oldphone)
-                if phone is not None:
-                    c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+
+            except TypeError as e:
+                phone = None
+
+            try:
+                oldemail = i['client']['contacts'][0]['contactValue']
+                email = email_check(oldemail)
+
+            except TypeError as e:
+                email = None
+
+            c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                               (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword,
-                               fio,
-                               dept, deadline, status))
-            except TypeError:
-                phone = oldphone
-                status = 'Bad phone'
-                email = i['client']['contacts'][0]['contactValue']
-                c.execute("INSERT OR IGNORE INTO calltouch VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                          (lead_id, date, time, subject, type, phone, email, source, medium, utm_content, keyword, fio,
-                           dept, deadline, status))
+                               fio, dept, deadline, status))
 
             conn.commit()
             conn.close()
@@ -140,7 +141,7 @@ def calltouch_calls_request(date_report):
             phone = i['callerNumber']
             source = i['source']
             medium = i['medium']
-            utm_content = bannerid_compaignid(i['utmContent'])
+            utm_content = bannerid_compaignid(i['utmContent']) # TODO Заменить на тип РК
             keyword = i['keyword']
             dept = call_dept(phone, date_calls)
             conn = sqlite3.connect('dbtel.db')
@@ -202,6 +203,21 @@ def tel_datatel(tel_number):
         datatel = None
 
     return datatel
+
+
+def email_check(email):
+    """ Проверка почтового адреса по маске """
+
+
+    try:
+        re_mail = re.search(r'\w+@\w+\.\w+', email)
+        result = re_mail.group(0)
+    except AttributeError:
+        result = None
+    except TypeError:
+        result = None
+
+    return result
 
 
 def subject_dept(subject):

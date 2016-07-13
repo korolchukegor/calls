@@ -85,7 +85,7 @@ def copy_and_add(date_start, date_end, table):
     """ Копирование и обработка файлов """
 
     lst = []
-    if table == 'calls':
+    if table == 'calls' or table == 'calls_out':
         while True:
             date_start = date_start + datetime.timedelta(days=1)
             if date_start == date_end:
