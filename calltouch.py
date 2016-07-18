@@ -33,7 +33,6 @@ def call_dept(phone, date):
     try:
         c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date)) # TODO Добавить проверку по времени звонка
         dept = c.fetchone()[0]
-        logging.debug('call_dept - OK - {} is moving to {}'.format(phone, dept))
     except TypeError as e:
         logging.warning('{} - {} is moving to other, {}'.format(e.args[0], phone, date))
         dept = 'other'
@@ -54,7 +53,7 @@ def calltouch_leads_request(date_report):
 
     }
     try:
-        req_calltouch = requests.get(url_calltouch, data)
+        req_calltouch = requests.get(url_calltouch, data, timeout=0.001)
     except Exception as e:
         logging.warning('Calltouch leads request ERROR - {}'.format(e.args[0]))
 
@@ -100,7 +99,7 @@ def calltouch_leads_request(date_report):
 
             conn.commit()
             conn.close()
-            logging.debug('Calltouch leads added OK')
+
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args[0]))
 
@@ -119,7 +118,7 @@ def calltouch_calls_request(date_report):
 
     }
     try:
-        req_calltouch = requests.get(url_calltouch_calls, data)
+        req_calltouch = requests.get(url_calltouch_calls, data, timeout=0.001)
     except Exception as e:
         logging.warning('Calltouch call request ERROR - {}'.format(e.args[0]))
 
@@ -152,7 +151,6 @@ def calltouch_calls_request(date_report):
 
             conn.commit()
             conn.close()
-            logging.debug('Calltouch calls added OK')
 
         except sqlite3.Error as e:
             logging.warning('Error with adding to DB - {}'.format(e.args))
@@ -170,7 +168,11 @@ def bannerid_compaignid(bannerid):
             'BannerIDS': [bannerid]
         }
     }
-    resp = requests.post(url_direct, data=json.dumps(data))
+    try:
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=0.001)
+    except Exception as e:
+        logging.warning('Direct request ERROR - {}'.format(e.args[0]))
+
     js = json.loads(resp.text)
     try:
         for pos in js['data']:
@@ -193,9 +195,13 @@ def tel_datatel(tel_number):
         'X-Secret': secret_dadata
 
     }
-    request = requests.post(url_dadata, data=json.dumps(data), headers=headers)
+    try:
+        request = requests.post(url_dadata, data=json.dumps(data), headers=headers, timeout=0.001)
+    except Exception as e:
+        logging.warning('DaDaTa request ERROR - {}'.format(e.args[0]))
+
     js = json.loads(request.text)
-    logging.debug('DaDaTa status - {}'.format(request.status_code))
+
     try:
         datatel = js[0]['country_code'] + js[0]['city_code'] + js[0]['number']
 

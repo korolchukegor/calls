@@ -19,7 +19,6 @@ class Database_manager:
         try:
             self.conn = sqlite3.connect(dbpath)
             self.c = self.conn.cursor()
-            logging.info('Connection to DB OK')
 
         except sqlite3.Error as e:
             logging.warning('DB problem: {}'.format(e.args[0]))

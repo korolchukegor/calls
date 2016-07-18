@@ -44,10 +44,10 @@ def check_direct(dept, date_report, compaign_type):
     }
 
     try:
-        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'))
+        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'), timeout=0.001)
         js = json.loads(response.text)
     except Exception as e:
-        logging.warning(e.args[0])
+        logging.warning('Direct request ERROR - {}'.format(e.args[0]))
 
     try:
         for i in js['data']:
@@ -60,7 +60,6 @@ def check_direct(dept, date_report, compaign_type):
                 compaign['clicks'].append(i["ClicksContext"])
                 compaign['sum'].append(i["SumContext"])
 
-        logging.debug('Direct request {} OK'.format(date))
 
     except KeyError as e:
         logging.warning('Direct request problem {}'.format(e.args[0]))
@@ -78,7 +77,7 @@ def check_direct(dept, date_report, compaign_type):
 
         conn.commit()
         conn.close()
-        logging.debug('Direct data added OK')
+
     except sqlite3.Error as e:
         logging.warning('Error with adding to DB - {}'.format(e.args[0]))
 
@@ -95,7 +94,12 @@ def compaignid_bannerid(bannerid):
             'BannerIDS': [bannerid]
         }
     }
-    resp = requests.post(url_direct, data=json.dumps(data))
+
+    try:
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=0.001)
+    except Exception as e:
+        logging.warning('Direct request ERROR - {}'.format(e.args[0]))
+
     js = json.loads(resp.text)
     try:
         for pos in js['data']:

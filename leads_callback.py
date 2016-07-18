@@ -72,6 +72,7 @@ def leads_callback(date_report):
                     status_txt = 'Успешный звонок\n'
 
             else:
+                status = 'Not called'
                 status_txt = 'Заявка без обзвона!!!\n'
 
         else:

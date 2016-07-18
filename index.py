@@ -76,7 +76,6 @@ def check_phone(file, int_dept_nums, dept, week, time):
             except ValueError:
                 logging.warning(u'calls_back problem'.format(i[3]))
 
-    logging.debug('{} checked and added to base'.format(dept))
     conn.commit()
     conn.close()
 
@@ -181,4 +180,3 @@ def base_days_lost(table):
                 logging.warning('dates between {} and {} are lost'.format(date_index, next_date_index))
                 copy_and_add(date_index, next_date_index, table)
 
-        logging.debug('all dates are in the {}'.format(table))
