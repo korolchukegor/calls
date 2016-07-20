@@ -24,22 +24,6 @@ token_dadata = config['dadata']['token']
 secret_dadata = config['dadata']['secret']
 
 
-def call_dept(phone, date):
-    """ Определение департамента по номеру телефона входящего зонка """
-
-    phone = '8' + str(phone)[1:]
-    conn = sqlite3.connect('dbtel.db')
-    c = conn.cursor()
-    try:
-        c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date)) # TODO Добавить проверку по времени звонка
-        dept = c.fetchone()[0]
-    except TypeError as e:
-        logging.warning('{} - {} is moving to other, {}'.format(e.args[0], phone, date))
-        dept = 'other'
-    conn.close()
-    return dept
-
-
 def calltouch_leads_request(date_report):
     """ Запрос данных по заявкам в Calltouch """
 
@@ -53,9 +37,11 @@ def calltouch_leads_request(date_report):
 
     }
     try:
-        req_calltouch = requests.get(url_calltouch, data, timeout=0.001)
-    except Exception as e:
+        req_calltouch = requests.get(url_calltouch, data, timeout=10)
+
+    except requests.exceptions.RequestException as e:
         logging.warning('Calltouch leads request ERROR - {}'.format(e.args[0]))
+        req_calltouch = requests.get(url_calltouch, data, timeout=10)
 
     jdata = json.loads(req_calltouch.text)
     for i in jdata:
@@ -118,9 +104,11 @@ def calltouch_calls_request(date_report):
 
     }
     try:
-        req_calltouch = requests.get(url_calltouch_calls, data, timeout=0.001)
-    except Exception as e:
+        req_calltouch = requests.get(url_calltouch_calls, data, timeout=10)
+
+    except requests.exceptions.RequestException as e:
         logging.warning('Calltouch call request ERROR - {}'.format(e.args[0]))
+        req_calltouch = requests.get(url_calltouch_calls, data, timeout=10)
 
     jdata = json.loads(req_calltouch.text)
 
@@ -169,9 +157,11 @@ def bannerid_compaignid(bannerid):
         }
     }
     try:
-        resp = requests.post(url_direct, data=json.dumps(data), timeout=0.001)
-    except Exception as e:
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=10)
+
+    except requests.exceptions.RequestException as e:
         logging.warning('Direct request ERROR - {}'.format(e.args[0]))
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=10)
 
     js = json.loads(resp.text)
     try:
@@ -195,10 +185,13 @@ def tel_datatel(tel_number):
         'X-Secret': secret_dadata
 
     }
+
     try:
-        request = requests.post(url_dadata, data=json.dumps(data), headers=headers, timeout=0.001)
-    except Exception as e:
+        request = requests.post(url_dadata, data=json.dumps(data), headers=headers, timeout=10)
+
+    except requests.exceptions.RequestException as e:
         logging.warning('DaDaTa request ERROR - {}'.format(e.args[0]))
+        request = requests.post(url_dadata, data=json.dumps(data), headers=headers, timeout=10)
 
     js = json.loads(request.text)
 
@@ -246,3 +239,19 @@ def subject_dept(subject):
 
     else:
         return 'other'
+
+
+def call_dept(phone, date):
+    """ Определение департамента по номеру телефона входящего зонка """
+
+    phone = '8' + str(phone)[1:]
+    conn = sqlite3.connect('dbtel.db')
+    c = conn.cursor()
+    try:
+        c.execute("SELECT department FROM calls WHERE num = (?) AND date = (?)", (phone, date)) # TODO Добавить проверку по времени звонка
+        dept = c.fetchone()[0]
+    except TypeError as e:
+        logging.warning('{} - {} is moving to other, {}'.format(e.args[0], phone, date))
+        dept = 'other'
+    conn.close()
+    return dept

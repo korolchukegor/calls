@@ -387,10 +387,15 @@ def create_dashboard(plot_url1, plot_url2, plot_url3, plot_url4, plot_url5, plot
             "passphrase": ""
         }
     }
-
-    response = requests.post('https://dashboards.ly/publish',
-                             data={'dashboard': json.dumps(dashboard_json)},
-                             headers={'content-type': 'application/x-www-form-urlencoded'})
+    try:
+        response = requests.post('https://dashboards.ly/publish',
+                                 data={'dashboard': json.dumps(dashboard_json)},
+                                 headers={'content-type': 'application/x-www-form-urlencoded'}, timeout=10)
+    except requests.exceptions.RequestException as e:
+        logging.warning('Dashboard request ERROR - {}'.format(e.args[0]))
+        response = requests.post('https://dashboards.ly/publish',
+                                 data={'dashboard': json.dumps(dashboard_json)},
+                                 headers={'content-type': 'application/x-www-form-urlencoded'}, timeout=10)
 
     response.raise_for_status()
     dashboard_url = response.json()['url']

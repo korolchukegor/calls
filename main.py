@@ -30,8 +30,8 @@ if __name__ == '__main__':
     date_report = files.day_before
 
     logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
-                        level=logging.DEBUG, filename=u'log.log')
-    logging.info('------SCRIPT STARTS------')
+                        level=logging.WARNING, filename=u'log.log')
+    logging.info('------SCRIPT {} STARTS------'.format(date_report))
 
     files.copyfile(files.server_dir + files.file_name + '.csv', files.work_file)
 

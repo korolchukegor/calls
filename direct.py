@@ -44,10 +44,13 @@ def check_direct(dept, date_report, compaign_type):
     }
 
     try:
-        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'), timeout=0.001)
+        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'), timeout=10)
         js = json.loads(response.text)
-    except Exception as e:
+
+    except requests.exceptions.RequestException as e:
         logging.warning('Direct request ERROR - {}'.format(e.args[0]))
+        response = requests.post(url_direct, data=json.dumps(data, ensure_ascii=False).encode('utf8'), timeout=10)
+        js = json.loads(response.text)
 
     try:
         for i in js['data']:
@@ -96,9 +99,11 @@ def compaignid_bannerid(bannerid):
     }
 
     try:
-        resp = requests.post(url_direct, data=json.dumps(data), timeout=0.001)
-    except Exception as e:
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=10)
+
+    except requests.exceptions.RequestException as e:
         logging.warning('Direct request ERROR - {}'.format(e.args[0]))
+        resp = requests.post(url_direct, data=json.dumps(data), timeout=10)
 
     js = json.loads(resp.text)
     try:

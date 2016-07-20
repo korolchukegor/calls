@@ -1,7 +1,6 @@
 # coding: utf-8
 
 import sqlite3
-import logging
 import files
 
 
@@ -151,4 +150,4 @@ def make_html(template, link,
                                      insurance_leads=insurance_leads,
                                      insurance_calls=insurance_calls,
                                      insurance_no_callback=insurance_no_callback)
-    logging.info('html OK')
+

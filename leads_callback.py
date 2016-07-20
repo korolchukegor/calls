@@ -84,7 +84,6 @@ def leads_callback(date_report):
 
         except Exception as e:
             logging.warning(e.args[0])
-            print(e)
 
         with open('callback_report/callback - {}.txt'.format(date_calls), 'a') as txtfile:
             txtfile.write('{}\n{}\n{}\n{}\n'.format(leadheader, dt_lead_txt, deadline_txt, status_txt))
