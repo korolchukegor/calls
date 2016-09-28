@@ -1,0 +1,70 @@
+﻿﻿<html>
+<head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Статистика по звонкам и заявкам</title>
+</head>
+<body>
+    <h2 style="font-family:Geneva, Arial, Helvetica, sans-serif;">Отчет по звонкам и заявкам</h2>
+	<table style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size: 13px;border: 1px solid #a7a7a7; width: 100%">
+        <tr>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Отдел</b></th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Всего звонков (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Звонки с сайта (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Заявки с сайта (уникальные)</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Заявки без обзвона*</th>
+        </tr>
+        {% for item in items %}
+        {% for dept, sec in item.items() %}
+	    <tr>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>{{ dept }}</b></th>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ sec[0] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ sec[1] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ sec[2] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ sec[3] }}</td>
+                    {# To add a new sector use sec[number] in email_report -> html -> items -> zip #}
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    	</table>
+        <p style="font-family:Geneva, Arial, Helvetica, sans-serif;">* Учитываются заявки, пришедшие после 21.00 предыдущего дня</p>
+        {% if link is not none %}
+        <p style="font-family:Geneva, Arial, Helvetica, sans-serif;"><a href="{{ link }}">Графики</a></p>
+        {% endif %}
+        <h3 style="font-family:Geneva, Arial, Helvetica, sans-serif;">Заявки без обзвона/с задержкой</h3>
+        <table style="font-family:Geneva, Arial, Helvetica, sans-serif;font-size: 13px;border: 1px solid #a7a7a7; width: 100%">
+        <tr>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;"><b>Дата и время заявки</b></th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Телефон</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Имя</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Задержка</th>
+            <th style="padding: 5px;background-color:#d8d8d8;border: 1px;border-style: solid;border-color: #a7a7a7;">Отдел</th>
+        </tr>
+        {% if lost_leads is not none %}
+        {% for leads in lost_leads %}
+	    <tr>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[0] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[1] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[2] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">Без обзвона!</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[3] }}</td>
+                    {# To add a new sector use sec[number] in email_report -> html -> lost-leads #}
+        </tr>
+        {% endfor %}
+        {% endif %}
+        {% if late_leads is not none %}
+        {% for leads in late_leads %}
+	    <tr>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[0] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[1] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[2] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[3] }}</td>
+            <td style="padding: 5px;border: 1px;border-style: solid;border-color: #a7a7a7;text-align:center;">{{ leads[4] }}</td>
+                    {# To add a new sector use sec[number] in email_report -> html -> late-leads #}
+        </tr>
+        {% endfor %}
+        {% endif %}
+    	</table>
+
+
+</body>
+</html>
