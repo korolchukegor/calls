@@ -25,6 +25,13 @@ class ShowsAndClicks:
         Request for data from Yandex Direct
         """
 
+        token = None
+
+        if dept_num == 1:
+            token = config.TOKEN_DIRECT_PKW
+        elif dept_num != 1:
+            token = config.TOKEN_DIRECT
+
         dept = config.DEPARTMENTS[dept_num]
         dept_compaigns = dept[list(dept.keys())[0]]['direct']
         dept_name = list(dept.keys())[0]
@@ -32,7 +39,7 @@ class ShowsAndClicks:
 
         data = {
             'method': 'GetSummaryStat',
-            'token': config.TOKEN_DIRECT,
+            'token': token,
             'locale': 'ru',
             "param": {
 

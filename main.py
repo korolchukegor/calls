@@ -54,7 +54,7 @@ class Main:
         self.bar.update(25)
 
         # Ads data
-        # self.ads.get_data(self.date_report)
+        self.ads.get_data(self.date_report)
 
         # Traffic data
         self.tr.get_data(self.date_report)
@@ -157,5 +157,5 @@ if __name__ == '__main__':
     main = Main(config.DATE_REPORT)
     with Profiler() as p:
         main.everyday()
-    #     if datetime.date.today().weekday() == 0:  # If today is a monday
-    #         main.everyweek()
+        if datetime.date.today().weekday() == 0:  # If today is a monday
+            main.everyweek()

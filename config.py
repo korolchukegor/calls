@@ -106,6 +106,7 @@ DL_HOURS = int(config['deadline']['hours'])
 # direct
 URL_DIRECT = config['yandex_direct']['url']
 TOKEN_DIRECT = config['yandex_direct']['token']
+TOKEN_DIRECT_PKW = config['yandex_direct']['token_pkw']
 LOGIN_DIRECT = config['yandex_direct']['login']
 
 # analytics
