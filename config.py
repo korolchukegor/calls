@@ -4,13 +4,14 @@ import os
 import datetime
 import configparser
 import logging
+import codecs
 
 
 # main
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 config = configparser.ConfigParser()
-config.read_file('config2.ini')
+config.read_file(codecs.open('config2.ini', 'r', 'utf-8'))
 
 logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
                     level=logging.WARNING, filename=os.path.join(basedir, u'log2.log'))
