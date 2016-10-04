@@ -8,8 +8,9 @@ import sector as cs
 import plot_ly
 
 import logging
-import shutil
 import csv
+import os
+from ftplib import FTP
 from sqlalchemy import func, distinct
 
 
@@ -21,18 +22,25 @@ class Calls:
     @staticmethod
     def copyfiles(date):
         """
-        Copying files with calls from server to local directory
+        Copying files with calls from remote server to local directory
         """
 
         filename = DateFormat.date_filename(date)
-        shutil.copyfile(config.SERVER_DIR + filename, config.DIRECTORY_CALLS + filename)
+
+        with open('{}\\tarif\\{}'.format(config.basedir, filename), 'wb') as file:
+            with FTP(host=config.FTP_HOST) as ftp:
+                ftp.getwelcome()
+                ftp.login(user=config.FTP_LOGIN, passwd=config.FTP_PASSWORD)
+
+                ftp.dir()
+                ftp.retrbinary('RETR {}'.format(filename), callback=file.write)
 
     def parse_calls(self, date, session):
         """
         Parsing csv files with calls
         """
-        # TODO Сделать нормальный путь
-        with open('{}\{}'.format(config.DIRECTORY_CALLS, DateFormat.date_filename(date)), newline='') as csvfile:
+
+        with open(os.path.join(config.DIRECTORY_CALLS, DateFormat.date_filename(date)), newline='') as csvfile:
 
             callsreader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for i in callsreader:
