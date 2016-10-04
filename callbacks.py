@@ -128,7 +128,7 @@ class CheckCallBacks:
 
                     file.write(u'{} {} {} {} {}\n'.format(str(datetime_new), call_type, telephone_from,
                                                                 telephone_to, duration))
-                file.write('\n ------------------------- \n')
+                file.write('\n !!!!!!!!!!!!!!!!!!! \n')
                 c += 1
 
 
