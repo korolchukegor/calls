@@ -10,7 +10,7 @@ import logging
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 config = configparser.ConfigParser()
-config.read(os.path.join(basedir, 'config2.ini'))
+config.read_file('config2.ini')
 
 logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
                     level=logging.WARNING, filename=os.path.join(basedir, u'log2.log'))
