@@ -96,7 +96,7 @@ DEPARTMENTS = [
 ]
 
 # telephony
-DIRECTORY_CALLS = r'{}\\tarif\\'.format(basedir)  # Directory with csv files (calls)
+DIRECTORY_CALLS = r'{}/tarif/'.format(basedir)  # Directory with csv files (calls)
 # SERVER_DIR = config['calls_server']['directory']
 FTP_HOST = config['ftp']['host']
 FTP_LOGIN = config['ftp']['login']
