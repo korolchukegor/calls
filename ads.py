@@ -8,6 +8,7 @@ import plot_ly
 
 import logging
 import requests
+import os
 from googleapiclient.discovery import build
 from oauth2client.service_account import ServiceAccountCredentials
 import httplib2
@@ -67,7 +68,7 @@ class ShowsAndClicks:
 
         SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
         DISCOVERY_URI = 'https://analyticsreporting.googleapis.com/$discovery/rest'
-        KEY_FILE_LOCATION = config.KEY_FILE_LOCATION
+        KEY_FILE_LOCATION = os.path.join(config.basedir, config.KEY_FILE_LOCATION)
         SERVICE_ACCOUNT_EMAIL = config.SERVICE_ACCOUNT_EMAIL
         VIEW_ID = config.VIEW_ID
 

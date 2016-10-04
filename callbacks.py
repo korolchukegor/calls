@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from sqlalchemy import func, or_
+import os
 
 import db
 import config
@@ -115,7 +116,7 @@ class CheckCallBacks:
             .filter(func.DATE(db.Calltouch.deadline) == date_report)
         c = 1
         for i in query.all():
-            with open('leads_log.txt', 'a') as file:
+            with open(os.path.join(config.basedir, 'leads_log.txt', 'a')) as file:
                 datetime, dept, telephone, fio, deadline, status = i
                 file.write('Lead #{} {} {} {} {} {} {}\n'.format(c, str(datetime), dept, telephone, fio, deadline, status))
 

@@ -4,15 +4,16 @@ import os
 import datetime
 import configparser
 import logging
-# TODO Сделать нормальный путь
-config = configparser.ConfigParser()
-config.read('config2.ini')
 
-logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
-                    level=logging.WARNING, filename=u'log2.log')
 
 # main
 basedir = os.path.abspath(os.path.dirname(__file__))
+
+config = configparser.ConfigParser()
+config.read(os.path.join(basedir, 'config2.ini'))
+
+logging.basicConfig(format=u'%(levelname)-8s [%(asctime)s] %(message)s %(filename)s:%(lineno)d',
+                    level=logging.WARNING, filename=os.path.join(basedir, u'log2.log'))
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'neva.db')
 DATE_REPORT = datetime.date.today() - datetime.timedelta(days=1)
@@ -94,9 +95,11 @@ DEPARTMENTS = [
 ]
 
 # telephony
-# TODO Сделать нормальный путь
-DIRECTORY_CALLS = r'{}\tarif\\'.format(os.getcwd())  # Directory with csv files (calls)
-SERVER_DIR = config['calls_server']['directory']
+DIRECTORY_CALLS = r'{}\\tarif\\'.format(basedir)  # Directory with csv files (calls)
+# SERVER_DIR = config['calls_server']['directory']
+FTP_HOST = config['ftp']['host']
+FTP_LOGIN = config['ftp']['login']
+FTP_PASSWORD = config['ftp']['password']
 
 # callbacks
 DIR_CALLBACKS = config['callbacks']['directory']
