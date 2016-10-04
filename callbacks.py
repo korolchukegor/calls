@@ -118,16 +118,17 @@ class CheckCallBacks:
         for i in query.all():
             with open(os.path.join(config.basedir, 'leads_log.txt', 'a')) as file:
                 datetime, dept, telephone, fio, deadline, status = i
-                file.write('Lead #{} {} {} {} {} {} {}\n'.format(c, str(datetime), dept, telephone, fio, deadline, status))
+                string = u'Lead #{} {} {} {} {} {} {}\n'.format(c, str(datetime), dept, telephone, fio, deadline, status).encode('utf-8')
+                file.write(string)
 
                 query_new = session.query(db.Telephony.datetime, db.Telephony.call_type,
                                           db.Telephony.telephone_from, db.Telephony.telephone_to, db.Telephony.duration) \
                     .filter(func.DATE(db.Telephony.datetime) == date_report, db.Telephony.telephone_to == telephone)
                 for j in query_new.all():
                     datetime_new, call_type, telephone_from, telephone_to, duration = j
-
-                    file.write('{} {} {} {} {}\n'.format(str(datetime_new), call_type, telephone_from,
-                                                                telephone_to, duration))
+                    new_string = u'{} {} {} {} {}\n'.format(str(datetime_new), call_type, telephone_from,
+                                                                telephone_to, duration).encode('utf-8')
+                    file.write(new_string)
                 file.write('\n !!!!!!!!!!!!!!!!!!! \n')
                 c += 1
 
