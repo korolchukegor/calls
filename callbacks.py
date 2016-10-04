@@ -116,7 +116,7 @@ class CheckCallBacks:
             .filter(func.DATE(db.Calltouch.deadline) == date_report)
         c = 1
         for i in query.all():
-            with open(os.path.join(config.basedir, 'leads_log.txt'), 'a') as file:
+            with open(os.path.join(config.basedir, 'leads_log.txt'), 'ab') as file:
                 datetime, dept, telephone, fio, deadline, status = i
                 string = u'Lead #{} {} {} {} {} {} {}\n'.format(c, str(datetime), dept, telephone, fio, deadline, status).encode('utf-8')
                 file.write(string)
@@ -129,7 +129,6 @@ class CheckCallBacks:
                     new_string = u'{} {} {} {} {}\n'.format(str(datetime_new), call_type, telephone_from,
                                                                 telephone_to, duration).encode('utf-8')
                     file.write(new_string)
-                file.write('\n !!!!!!!!!!!!!!!!!!! \n')
                 c += 1
 
 
