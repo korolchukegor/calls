@@ -27,7 +27,7 @@ class Calls:
 
         filename = DateFormat.date_filename(date)
 
-        with open('{}\\tarif\\{}'.format(config.basedir, filename), 'wb') as file:
+        with open('{}/tarif/{}'.format(config.basedir, filename), 'wb') as file:
             with FTP(host=config.FTP_HOST) as ftp:
                 ftp.getwelcome()
                 ftp.login(user=config.FTP_LOGIN, passwd=config.FTP_PASSWORD)
