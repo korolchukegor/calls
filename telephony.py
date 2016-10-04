@@ -50,7 +50,7 @@ class Calls:
                 else:
                     tel_to = i[3]
 
-                dept = self.phone_dept(int(tel_to))
+                dept = self.phone_dept(tel_to)
 
                 try:
                     if i[1] == 'RX':
@@ -88,18 +88,25 @@ class Calls:
         """
         Check department by telephone to.
         """
+        try:
 
-        for dept in config.DEPARTMENTS:
-            dept_name = list(dept.keys())[0]
-            dept_dict = dept[dept_name]
-            int_nums = dept_dict['int_nums']
+            for dept in config.DEPARTMENTS:
+                dept_name = list(dept.keys())[0]
+                dept_dict = dept[dept_name]
+                int_nums = dept_dict['int_nums']
 
-            if tel in int_nums:
-                return dept_name
+                if int(tel) in int_nums:
+                    return dept_name
+                else:
+                    continue
             else:
-                continue
-        else:
+                return "Unknown"
+
+        except ValueError as e:
+            logging.warning('Error with the definition of the Department - {}, {}'.format(e.args[0], tel))
             return "Unknown"
+
+
 
 
 class Telephony(cs.Sector):

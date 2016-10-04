@@ -12,6 +12,26 @@ class CheckCallBacks:
     This class responsible for checking whether all leads are called back
     """
     # TODO Переделать все 2 запросами вместо join
+
+    @staticmethod
+    def check_status_new(date_report, session):
+        """
+        Finds lead in db and check its status
+        """
+
+        query = session.query(db.Calltouch.datetime, db.Telephony.datetime, db.Telephony.duration,
+                              db.Calltouch.telephone, db.Calltouch.status, db.Calltouch.deadline) \
+            .join(db.Telephony, db.Telephony.telephone_to == db.Calltouch.telephone) \
+            .filter(func.DATE(db.Calltouch.deadline) == date_report, func.DATE(db.Telephony.datetime) == date_report,
+                    db.Telephony.datetime > db.Calltouch.datetime)
+
+        for i in query.all():
+            lead_date, call_date, duration, telephone, status, deadline = i
+
+
+
+
+
     @staticmethod
     def check_status(date_report, session):
         """

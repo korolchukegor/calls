@@ -43,7 +43,7 @@ class Main:
         self.tp.get_data(self.date_report)
         tp_data = self.tp.report_data(self.date_report, self.date_report)
 
-        self.bar.update(15)
+        self.bar.update(5)
 
         # Calltouch data
         self.ct.get_data(self.date_report)
@@ -51,7 +51,7 @@ class Main:
         ct_calls = ct_report.get('calls')
         ct_leads = ct_report.get('leads')
 
-        self.bar.update(25)
+        self.bar.update(10)
 
         # Ads data
         self.ads.get_data(self.date_report)
@@ -59,7 +59,7 @@ class Main:
         # Traffic data
         self.tr.get_data(self.date_report)
 
-        self.bar.update(35)
+        self.bar.update(20)
 
         # Callbacks
         self.cb.get_data(self.date_report)
@@ -68,19 +68,19 @@ class Main:
         lost_leads = callbacks.get('lost_leads')
         late_leads = callbacks.get('late_leads')
 
-        self.bar.update(55)
+        self.bar.update(30)
 
         # Creating HTML data for email report
         html_data = self.er.html(tp_data, ct_calls, ct_leads, num_lost_leads, lost_leads, late_leads, link=None)
         subject = "Отчет за {}".format(self.date_report)
 
-        self.bar.update(75)
+        self.bar.update(40)
 
         # Creating and sending email
         msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG2, subject, html_data)
         self.er.send_email(config.FROM_ADDR, config.TO_ADDR_DEBUG2, msg)
 
-        self.bar.update(100)
+        self.bar.update(50)
 
     def everyweek(self):
         """
@@ -94,7 +94,7 @@ class Main:
         self.tp.check_data()
         tp_data = self.tp.report_data(config.WEEK_REPORT_DATE, self.date_report)
 
-        self.bar.update(120)
+        self.bar.update(60)
 
         # Calltouch data
         self.ct.check_data()
@@ -102,7 +102,7 @@ class Main:
         ct_calls = ct_report.get('calls')
         ct_leads = ct_report.get('leads')
 
-        self.bar.update(140)
+        self.bar.update(70)
 
         # Callbacks
         self.cb.get_data(self.date_report)
@@ -111,29 +111,29 @@ class Main:
         lost_leads = callbacks.get('lost_leads')
         late_leads = callbacks.get('late_leads')
 
-        self.bar.update(160)
+        self.bar.update(80)
 
         # Creating plots
         tp_plot = self.tp.plot_data()
         ct_plots = self.ct.plot_data()
         calls_plot = ct_plots.get('calls')
         leads_plot = ct_plots.get('leads')
-        # ads_plots = self.ads.plot_data()
-        # ctr_plot = ads_plots.get('ctr')
-        # cpc_plot = ads_plots.get('cpc')
+        ads_plots = self.ads.plot_data()
+        ctr_plot = ads_plots.get('ctr')
+        cpc_plot = ads_plots.get('cpc')
 
-        self.bar.update(180)
+        self.bar.update(90)
 
         # Creating dashboard
-        link = self.pl.create_dashboard(tp_plot, calls_plot, leads_plot) #, ctr_plot, cpc_plot)
+        link = self.pl.create_dashboard(tp_plot, calls_plot, leads_plot, ctr_plot, cpc_plot)
 
-        self.bar.update(190)
+        self.bar.update(93)
 
         # Creating HTML data for email report
         html_data = self.er.html(tp_data, ct_calls, ct_leads, num_lost_leads, lost_leads, late_leads, link)
         subject = "Отчет за период {} - {}".format(config.WEEK_REPORT_DATE, self.date_report)
 
-        self.bar.update(195)
+        self.bar.update(98)
 
         # Creating and sending email
         msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG2, subject, html_data)
