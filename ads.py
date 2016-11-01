@@ -97,7 +97,7 @@ class ShowsAndClicks:
                         }]
                 }
             ).execute()
-
+ 
             for report in response.get('reports', []):
                 columnHeader = report.get('columnHeader', {})
                 dimensionHeaders = columnHeader.get('dimensions', [])
@@ -113,13 +113,14 @@ class ShowsAndClicks:
                     for values in dateRangeValues:
                         dimensions_dict.update({header: value for header, value in zip(headers, values['values'])})
                         report_data.append(dimensions_dict)
-
+               
                 list_by_dept = [i for i in report_data if i['ga:adwordsCampaignID'] in dept_compaigns]
 
                 return {dept_name: list_by_dept}
 
         except Exception as e:
             logging.warning(e)
+            print(e)
 
     @staticmethod
     def parse(request, date_report, session):

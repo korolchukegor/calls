@@ -39,9 +39,11 @@ class Sector:
                 date_to = dt.datetime.today() - dt.timedelta(days=1)
                 dates = [date for date in
                          dc.DateFormat.date_range(date_from, date_to, dt.timedelta(days=1), inclusion=True)]
-
+		
+                
                 for lost_date in dates:
                     self.get_data(lost_date)
+                #sys.exit('DB is empty, dates are lost - {}'.format(dates))
 
             else:  # if base is NOT empty but there are not all dates
                 query = session.query(distinct(func.DATE(table.datetime))).order_by(table.datetime.asc())
@@ -58,6 +60,7 @@ class Sector:
 
                     for lost_date in list_lost:
                         self.get_data(lost_date)
+                    #sys.exit('Dates are lost - {}'.format(list_lost))
 
                 elif call_list[-1] < yesterday:  # if for some reason there is no yesterday's date and dates before it
                     logging.warning(
@@ -68,6 +71,7 @@ class Sector:
 
                     for lost_date in list_lost:
                         self.get_data(lost_date)
+                    #sys.exit('Dates are lost - {}'.format(list_lost))
 
                 for index, item in enumerate(call_list, start=0):
                     try:
@@ -80,6 +84,7 @@ class Sector:
                                                                   dt.timedelta(days=1))]
                             for lost_date in list_lost:
                                 self.get_data(lost_date)
+                            #sys.exit('Dates are lost - {}'.format(list_lost))
 
                     except IndexError:
                         pass

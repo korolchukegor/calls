@@ -27,7 +27,7 @@ class Calls:
 
         filename = DateFormat.date_filename(date)
 
-        with open('{}\\tarif\\{}'.format(config.basedir, filename), 'wb') as file:
+        with open('{}/tarif/{}'.format(config.basedir, filename), 'wb') as file:
             with FTP(host=config.FTP_HOST) as ftp:
                 ftp.getwelcome()
                 ftp.login(user=config.FTP_LOGIN, passwd=config.FTP_PASSWORD)
@@ -135,7 +135,7 @@ class Telephony(cs.Sector):
         calls = Calls()
 
         with db.session_scope() as session:
-            Calls.copyfiles(date)
+            #Calls.copyfiles(date)
             calls.parse_calls(date, session)
 
     def report_data(self, date_start, date_end):

@@ -25,6 +25,7 @@ class Main:
         self.bar = progressbar.ProgressBar()
         self.date_report = date_report
         self.tp = telephony.Telephony()
+
         self.ct = calltouch.Calltouch()
         self.ads = ads.Ads()
         self.tr = traffic.Traffic()
@@ -40,6 +41,7 @@ class Main:
         """
 
         # Telephony data
+        telephony.Calls.copyfiles(self.date_report)
         self.tp.get_data(self.date_report)
         tp_data = self.tp.report_data(self.date_report, self.date_report)
 

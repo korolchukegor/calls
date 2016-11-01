@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import os
 import config
 import db
 from datetime_conversion import DateFormat
@@ -17,7 +18,7 @@ def request_analytics(date_report, session):
     """
     SCOPES = ['https://www.googleapis.com/auth/analytics.readonly']
     DISCOVERY_URI = 'https://analyticsreporting.googleapis.com/$discovery/rest'
-    KEY_FILE_LOCATION = config.KEY_FILE_LOCATION
+    KEY_FILE_LOCATION = os.path.join(config.basedir, config.KEY_FILE_LOCATION)
     SERVICE_ACCOUNT_EMAIL = config.SERVICE_ACCOUNT_EMAIL
     VIEW_ID = config.VIEW_ID
     date = DateFormat.date_str(date_report)

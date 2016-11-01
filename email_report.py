@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import os
 import smtplib
 import logging
 from email.header import Header
@@ -24,9 +25,9 @@ class EmailReport:
         # Add another sector_report to zip
         items = [{list(dept.values())[0]['name']: [tel, call, lead, lost]} for dept, tel, call, lead, lost in
                  zip(config.DEPARTMENTS, telephony, calltouch_calls, calltouch_leads, num_lost_leads)]
-
-        env = Environment(loader=FileSystemLoader('.'))
-        template = env.get_template('{}'.format(config.TEMPLATE))
+        
+        env = Environment(loader=FileSystemLoader(config.basedir))
+        template = env.get_template(config.TEMPLATE)
 
         return template.render(link=link, items=items, lost_leads=lost_leads, late_leads=late_leads)
 
