@@ -66,7 +66,7 @@ class CheckCallBacks:
                               db.Calltouch.telephone, db.Calltouch.status, db.Calltouch.deadline) \
             .join(db.Telephony, db.Telephony.telephone_to == db.Calltouch.telephone) \
             .filter(func.DATE(db.Calltouch.deadline) == date_report, func.DATE(db.Telephony.datetime) == date_report,
-                    db.Telephony.datetime > db.Calltouch.datetime).group_by(db.Calltouch.telephone)
+                    db.Telephony.datetime > db.Calltouch.datetime, db.Calltouch.status != 'Doubled').group_by(db.Calltouch.telephone)
 
         for i in query.all():
             lead_date, call_date, duration, telephone, status, deadline = i
