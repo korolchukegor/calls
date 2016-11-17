@@ -26,11 +26,34 @@ class CheckCallBacks:
             .filter(func.DATE(db.Calltouch.deadline) == date_report, func.DATE(db.Telephony.datetime) == date_report,
                     db.Telephony.datetime > db.Calltouch.datetime)
 
+
         for i in query.all():
             lead_date, call_date, duration, telephone, status, deadline = i
 
 
+    @staticmethod
+    def check_double(date_report, session):
+        """
+        Find doubled leads and mark it
+        """
 
+        query = session.query(db.Calltouch.datetime, db.Calltouch.telephone) \
+                    .filter(func.DATE(db.Calltouch.deadline) == date_report)
+
+        dates_tels = [i for i in query.all()]
+        tels = [t[1] for t in dates_tels]
+        uniq_tel = set(tel for tel in tels if tels.count(tel) > 1)
+        double_dates = []
+        for u_tel in uniq_tel:
+            dict = {u_tel: []}
+            for item in dates_tels:
+                if item[1] == u_tel:
+                    dict[u_tel].append(item[0])
+            double_dates.append(min(dict[u_tel]))
+
+        for d_d in double_dates:
+            session.query(db.Calltouch).filter(db.Calltouch.datetime == d_d, func.DATE(db.Calltouch.deadline) == date_report)\
+                .update({'status': 'Doubled'}, synchronize_session=False)
 
 
     @staticmethod
@@ -100,7 +123,7 @@ class CheckCallBacks:
         query = session.query(db.Calltouch.datetime, db.Telephony.datetime, db.Calltouch.department,
                               db.Calltouch.telephone, db.Calltouch.fio, db.Calltouch.deadline) \
             .join(db.Telephony, db.Telephony.telephone_to == db.Calltouch.telephone) \
-            .filter(func.DATE(db.Calltouch.deadline).between(date_start, date_end), or_(*terms)) \
+            .filter(func.DATE(db.Calltouch.deadline).between(date_start, date_end), func.DATE(db.Telephony.datetime).between(date_start, date_end), or_(*terms)) \
             .group_by(db.Calltouch.telephone).order_by(func.min(db.Telephony.datetime))
 
         return [(str(i[0]).split('.')[0], i[3], i[4], str(i[1] - i[5]).split('.')[0], i[2]) for i in query.all()]
@@ -142,6 +165,7 @@ class CallBacks(cs.Sector):
 
     def get_data(self, date):
         with db.session_scope() as session:
+            CheckCallBacks.check_double(date, session)
             CheckCallBacks.check_status(date, session)
 
             # TODO удалить это
