@@ -94,6 +94,7 @@ class ShowsAndClicks:
                             'dimensions': [{'name': 'ga:adwordsCustomerID'}, {'name': 'ga:adwordsCampaignID'},
                                            {'name': 'ga:adDistributionNetwork'}]
 
+
                         }]
                 }
             ).execute()
@@ -180,7 +181,9 @@ class ShowsAndClicks:
             db.Ads.source_type == 'search')
         try:
             return round(query.one()[0] / query.one()[1] * 100, 2)
-        except TypeError:
+        except TypeError:	
+            return 0
+        except ZeroDivisionError:
             return 0
 
     @staticmethod
@@ -199,6 +202,9 @@ class ShowsAndClicks:
             return round(query.one()[0] / query.one()[1], 2)
         except TypeError:
             return 0
+        except ZeroDivisionError:
+            return 0
+
 
 
 class Ads(cs.Sector):

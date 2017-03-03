@@ -68,7 +68,6 @@ class Sector:
                     list_lost = [lost_date for lost_date in
                                  dc.DateFormat.date_range(call_list[-1] + dt.timedelta(days=1), yesterday,
                                                           dt.timedelta(days=1), inclusion=True)]
-
                     for lost_date in list_lost:
                         self.get_data(lost_date)
                     #sys.exit('Dates are lost - {}'.format(list_lost))
@@ -82,6 +81,7 @@ class Sector:
                             list_lost = [lost_date for lost_date in
                                          dc.DateFormat.date_range(call_list[index], call_list[index + 1],
                                                                   dt.timedelta(days=1))]
+                           
                             for lost_date in list_lost:
                                 self.get_data(lost_date)
                             #sys.exit('Dates are lost - {}'.format(list_lost))

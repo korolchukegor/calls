@@ -45,8 +45,8 @@ class LeadsAndCalls:
         }
 
         try:
-            req_calltouch = requests.get(url, data, timeout=10)
-
+            req_calltouch = requests.get(url, data, timeout=60)
+            print(req_calltouch.status_code)
         except requests.exceptions.RequestException as e:
             logging.warning('Calltouch request ERROR - {}'.format(e.args[0]))
             time.sleep(30)

@@ -44,6 +44,7 @@ class Calls:
 
             callsreader = csv.reader(csvfile, delimiter=';', quotechar='|')
             for i in callsreader:
+                
                 if len(i[2]) == 11 and i[2][0:1] == '8':
                     tel_from = '7' + i[2][1:]
                 elif len(i[2]) == 10:

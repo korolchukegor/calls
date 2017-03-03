@@ -79,8 +79,8 @@ class Main:
         self.bar.update(40)
 
         # Creating and sending email
-        msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG2, subject, html_data)
-        self.er.send_email(config.FROM_ADDR, config.TO_ADDR_DEBUG2, msg)
+        msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG, subject, html_data)
+        self.er.send_email(config.FROM_ADDR, config.TO_ADDR_DEBUG, msg)
 
         self.bar.update(50)
 
@@ -138,8 +138,8 @@ class Main:
         self.bar.update(98)
 
         # Creating and sending email
-        msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG2, subject, html_data)
-        self.er.send_email(config.FROM_ADDR, config.TO_ADDR_DEBUG2, msg)
+        msg = self.er.create_mail(config.FROM_ADDR, config.TO_ADDR_DEBUG, subject, html_data)
+        self.er.send_email(config.FROM_ADDR, config.TO_ADDR_DEBUG, msg)
 
         self.bar.finish()
 
